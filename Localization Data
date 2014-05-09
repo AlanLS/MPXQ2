@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locales default-locale="en-US" destination="res" package="lcl">
+   <locale country="US" language="en">
+      <entry key="VYN_Text" value="We will send a SMS to verify your number. Standard operator charges will apply."/>
+      <entry key="VYN_NumberTitle" value="Verify your number"/>
+      <entry key="VYN_EnterYourNumber" value="Enter your phone number."/>
+      <entry key="VYN_CountryRegion" value="Country/Region"/>
+      <entry key="VYN_PhoneNumber" value="Phone Number"/>
+      <entry key="VYN_EnterNumber" value="Enter phone number"/>
+      <entry key="VYN_NumberCorrect" value="Is this number correct?"/>
+      <entry key="Command_OK" value="OK"/>
+      <entry key="Command_Cancel" value="Cancel"/>
+      <entry key="Command_Change" value="Change"/>
+      <entry key="Command_Exit" value="Exit"/>
+      <entry key="Command_ResendSMS" value="ResendSMS"/>
+      <entry key="REG_Registering" value="Registering"/>
+      <entry key="REG_TryingAgain" value="Trying Again"/>
+      <entry key="REG_MESSAGEPLUS" value="Message+"/>
+      <entry key="ACT_SentSMS" value="We have sent you a SMS with an activation PIN to verify your phone number."/>
+      <entry key="ACT_EnterPINNumber" value="Enter PIN number"/>
+      <entry key="ACT_SMSResent" value="SMS with activation PIN sent again. Please check."/>
+      <entry key="ACT_InvalidPIN" value="Invalid PIN number. Pease try again."/>
+      <entry key="ACT_Activate" value="Activate"/>
+      <entry key="TRM_TermsAndConditions" value="Terms &amp; Condiions"/>
+      <entry key="TRM_Terms" value="You will always be able to send an SMS or broadcast message to any contact using [Vodafone Message+]{0}[Vodafone Message+] will also automatically enable you to enjoy a richer messaging experience when available based on the capability of your contact. Richer features will include Group Chat, 121 Chat and file, photo, video, location and ausio share, font size customization, richer emoticons and emoji support.{1}"/>
+      <entry key="Command_IAgree" value="I Agree"/>
+   </locale>
+</locales>

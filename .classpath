@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="res"/>
+	<classpathentry kind="con" path="org.elipse.mtj.JavaMEContainer/Series 40 5th Edition SDK/S40_5th_Edition_SDK"/>
+	<classpathentry exported="true" kind="lib" path="libs/LWUIT S40/IO/IO-MIDP.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/LWUIT S40/s40-6th-ed-sdk/S40-no-themes.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
