@@ -93,38 +93,4 @@ public class MPTextField extends TextArea
 	{
 		setText("");
 	}
-	/*
-	 * static final int QWERTY_SYMBOL_KEY = -54;
-	 * 
-	 * 
-	 * public KTextField() { super(); initKTextField(); }
-	 * 
-	 * public KTextField(final int columns) { super(columns); initKTextField();
-	 * }
-	 * 
-	 * public KTextField(final String text) { super(text); initKTextField(); }
-	 * 
-	 * public KTextField(final String text, final int columns) { super(text,
-	 * columns); initKTextField(); }
-	 * 
-	 * private void initKTextField() { //setLeftAndRightEditingTrigger(false);
-	 * //setUseSoftkeys(false); setReplaceMenu(true);
-	 * setConstraint(TextArea.NON_PREDICTIVE); };
-	 * 
-	 * // public boolean isUseSoftkeys() // { // return false; // } protected
-	 * boolean isEditingEndTrigger(final int keyCode) { return false; }
-	 * 
-	 * protected boolean isEditingTrigger(final int keyCode) { return false; }
-	 * 
-	 * protected boolean isSelectableInteraction() { return false; }
-	 * 
-	 * protected boolean isSymbolDialogKey(int keyCode) { return ((keyCode ==
-	 * getDefaultSymbolDialogKey()) || (keyCode == QWERTY_SYMBOL_KEY)); }
-	 * 
-	 * public void pointerReleased(int x, int y) { // prevent a drag operation
-	 * from going into edit mode<br /> if (isDragActivated()) {
-	 * super.pointerReleased(x, y); } else { if (isEditable() && isEnabled())//
-	 * && !isCellRenderer()) { Display.getInstance().editString(this,
-	 * getMaxSize(), getConstraint(), getText()); } } }
-	 */
 }

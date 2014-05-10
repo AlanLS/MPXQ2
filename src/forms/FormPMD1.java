@@ -14,17 +14,19 @@ import com.sun.lwuit.Label;
 import com.sun.lwuit.TextArea;
 import com.sun.lwuit.TextField;
 import com.sun.lwuit.events.ActionEvent;
+import com.sun.lwuit.events.DataChangedListener;
 import com.sun.lwuit.layouts.BoxLayout;
 import components.MPBorderlessLabel;
 import components.MPForm;
 import components.MPGrowTextArea;
+import components.MPTextFieldNoPrompt;
 import components.StyleHelpers;
 
 /**
  * @author Alan
  * 
  */
-public class FormPMD1 extends MPForm
+public class FormPMD1 extends MPForm implements DataChangedListener
 {
 	protected final int		PMD1_UNINITTED		= -1;
 	protected final int		PMD1_ENTRY			= 0;
@@ -34,7 +36,7 @@ public class FormPMD1 extends MPForm
 	protected Container[]	containers			= new Container[PMD1_COUNT];
 	//
 	private Label			lCountryRegion		= null;
-	private TextField		tfPhoneNumber		= null;
+	private MPTextFieldNoPrompt		tfPhoneNumber		= null;
 	private Button			lPhoneNumberVerify	= null;
 	//
 	private final Command	okCommand			= new Command(rsrc.getString(L10nConstants.keys.COMMAND_OK));
@@ -97,7 +99,7 @@ public class FormPMD1 extends MPForm
 				StyleHelpers.setPadding(blPhoneNumberTitle, 0, 0);
 				cntnr.addComponent(blPhoneNumberTitle);
 				//
-				tfPhoneNumber = new TextField();
+				tfPhoneNumber = new MPTextFieldNoPrompt();
 				TextField.setUseNativeTextInput(false);
 				//tfPhoneNumber = new TextField();
 				tfPhoneNumber.setText(userPhoneNumber);
@@ -109,6 +111,10 @@ public class FormPMD1 extends MPForm
 				StyleHelpers.setMargin(tfPhoneNumber, 0, 5);
 				StyleHelpers.setPadding(tfPhoneNumber, 4, 4);
 				tfPhoneNumber.addActionListener(this);
+				//tfPhoneNumber.addDataChangeListener(this);
+				//tfPhoneNumber.setReplaceMenu(false);
+				tfPhoneNumber.setSelectCommandText(rsrc.getString(L10nConstants.keys.COMMAND_OK));
+				
 				cntnr.addComponent(tfPhoneNumber);
 				tfPhoneNumber.requestFocus();
 				//
@@ -123,8 +129,9 @@ public class FormPMD1 extends MPForm
 			//
 			replaceContent(getContentPane(), containers[PMD1_ENTRY], null);
 			setBackCommand(exitCommand);
+			setDefaultCommand(null);
 			tfPhoneNumber.requestFocus();
-			//showHideOK();
+			getSelectCommand().setEnabled(false);
 			revalidate();
 			repaint();
 		}
@@ -209,15 +216,15 @@ public class FormPMD1 extends MPForm
 				{
 					showVerifyScreen();
 				}
-				//showHideOK();
 			}
 		}
 	}
 
 	private boolean isEntered()
 	{
-		return ((userPhoneNumber != null) && (userPhoneNumber.length() > 0));
+		return ((tfPhoneNumber.getText() != null) && (tfPhoneNumber.getText().length() > 0));
 	}
+
 	/*private void showHideOK()
 	{
 		final int cnt = getCommandCount();
@@ -243,4 +250,17 @@ public class FormPMD1 extends MPForm
 		}
 	}
 	*/
+	public void dataChanged(int arg0, int arg1)
+	{
+
+		
+		repaint();
+		revalidate();
+		repaint();
+		
+	
+		
+		
+		
+	}
 }

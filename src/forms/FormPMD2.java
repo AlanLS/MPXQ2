@@ -8,7 +8,6 @@ import java.util.TimerTask;
 import lcl.L10nConstants;
 import com.sun.lwuit.Command;
 import com.sun.lwuit.Container;
-import com.sun.lwuit.TextArea;
 import com.sun.lwuit.TextField;
 import com.sun.lwuit.events.ActionEvent;
 import com.sun.lwuit.layouts.BoxLayout;
@@ -16,7 +15,6 @@ import components.MPActivityIndicator;
 import components.MPBorderlessLabel;
 import components.MPForm;
 import components.MPGrowTextArea;
-import components.MPTextField;
 import components.StyleHelpers;
 
 /**
