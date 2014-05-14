@@ -64,7 +64,7 @@ public class FormSplash extends Form
 			timer.cancel();
 			timer = null;
 			cancel();
-			new FormPMD1().show();
+			new mainTab().show();
 			/*
 			 * // if (ApplicationData.getCASSessionToken() != null) { // we have
 			 * a previous session ApplicationData.getAccessToken();

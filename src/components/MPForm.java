@@ -26,7 +26,7 @@ abstract public class MPForm extends Form implements ActionListener, FocusListen
 	protected Class					priorClass				= null;
 	protected String				priorTitle				= null;
 	CommonTransitions				transitIn				= null;								// CommonTransitions.createFade(125);
-	protected static L10nResources	rsrc					= GlobalData.getRsrc();
+	private static L10nResources	rsrc					= GlobalData.getRsrc();
 	public final static Border		yllwBorder				= Border.createLineBorder(3, 0xFFFF00);	// yellow
 	public final static Border		blckBorder				= Border.createLineBorder(1, 0x000000);	// yellow
 	public final static Border		nrmlBorder				= Border.createLineBorder(2, 0xdadada);
@@ -191,5 +191,15 @@ abstract public class MPForm extends Form implements ActionListener, FocusListen
 		// }
 		// }
 		// }
+	}
+
+	public static L10nResources getRsrc()
+	{
+		return rsrc;
+	}
+
+	public static void setRsrc(L10nResources rsrc)
+	{
+		MPForm.rsrc = rsrc;
 	}
 }

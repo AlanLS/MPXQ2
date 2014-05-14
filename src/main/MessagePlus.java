@@ -37,30 +37,31 @@ public class MessagePlus extends MIDlet
 		//
 		// if (!Storage.isInitialized())
 		// {
-		Storage.init("KlinkPersist");
-		// }
-		Storage.getInstance();
-		try
-		{
-			final String[] ss = Storage.getInstance().listEntries();
-			System.out.println("Storage:");
-			for (int i = 0; i < ss.length; ++i)
-			{
-				final Object obj = Storage.getInstance().readObject(ss[i].toString());
-				if (obj != null)
+		/*		Storage.init("MPPersist");
+				// }
+				Storage.getInstance();
+				try
 				{
-					System.out.println(ss[i].toString() + " = " + obj.toString());
+					final String[] ss = Storage.getInstance().listEntries();
+					System.out.println("Storage:");
+					for (int i = 0; i < ss.length; ++i)
+					{
+						final Object obj = Storage.getInstance().readObject(ss[i].toString());
+						if (obj != null)
+						{
+							System.out.println(ss[i].toString() + " = " + obj.toString());
+						}
+						else
+						{
+							// Storage.getInstance().clearStorage();
+						}
+					}
+					System.out.println("End Storage");
 				}
-				else
+				catch (final Exception e)
 				{
-					// Storage.getInstance().clearStorage();
 				}
-			}
-			System.out.println("End Storage");
-		}
-		catch (final Exception e)
-		{
-		}
+		*/
 		/*
 		 * String txt = (
 		 * "To be, or not to be, that is the question: Whether 'tis Nobler in the mind to sufferThe Slings and Arrows of outrageous Fortune, Or to take Arms against a Sea of troubles, And by opposing end them: to die, to sleep No more; and by a sleep, to say we end The Heart-ache, and the thousand Natural shocks That Flesh is heir to? 'Tis a consummation Devoutly to be wished. To die to sleep, To sleep, perchance to Dream"

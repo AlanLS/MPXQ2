@@ -45,6 +45,11 @@ public class StyleHelpers
 		cmp.setPressedStyle(cmpStyle);
 	}
 
+	public static void removePadding(final Component cmp)
+	{
+		setPadding(cmp, 0, 0, 0, 0);
+	}
+
 	public static void setMargin(final Component cmp, final int top, final int bottom)
 	{
 		Style cmpStyle = cmp.getUnselectedStyle();
@@ -81,6 +86,11 @@ public class StyleHelpers
 		cmpStyle.setMargin(Component.LEFT, left);
 		cmpStyle.setMargin(Component.RIGHT, right);
 		cmp.setPressedStyle(cmpStyle);
+	}
+
+	public static void removeMargins(final Component cmp)
+	{
+		setMargin(cmp, 0, 0, 0, 0);
 	}
 
 	public static void setBorder(final Component cmp, final Border brdr)

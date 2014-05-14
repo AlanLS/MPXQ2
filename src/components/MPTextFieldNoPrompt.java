@@ -1,20 +1,35 @@
 package components;
 
 import com.sun.lwuit.Command;
-import com.sun.lwuit.TextField;
 
-public class MPTextFieldNoPrompt extends TextField
+public class MPTextFieldNoPrompt extends MPTextField
 {
-	protected  Command	installCommands(Command clear, Command t9) 
+	public MPTextFieldNoPrompt()
 	{
-		return null;
+		super();
 	}
 
-	protected  void	removeCommands(Command clear, Command t9, Command originalClear) 
+	public MPTextFieldNoPrompt(int columns)
 	{
-		
+		super(columns);
 	}
-	
-	
-	
+
+	public MPTextFieldNoPrompt(String text)
+	{
+		super(text);
+	}
+
+	public MPTextFieldNoPrompt(String text, int columns)
+	{
+		super(text, columns);
+	}
+
+	protected Command installCommands(Command clear, Command t9)
+	{
+		return super.installCommands(clear, null);
+	}
+	//protected void removeCommands(Command clear, Command t9, Command originalClear)
+	//{
+	//	
+	//}
 }

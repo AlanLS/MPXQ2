@@ -10,12 +10,12 @@ import components.MPGrowTextArea;
 
 public class FormTandC extends MPForm
 {
-	private final Command	cancelCommand	= new Command(rsrc.getString(L10nConstants.keys.COMMAND_CANCEL));
-	private final Command	iAgreeCommand	= new Command(rsrc.getString(L10nConstants.keys.COMMAND_IAGREE));
+	private final Command	cancelCommand	= new Command(getRsrc().getString(L10nConstants.keys.COMMAND_CANCEL));
+	private final Command	iAgreeCommand	= new Command(getRsrc().getString(L10nConstants.keys.COMMAND_IAGREE));
 
 	public FormTandC()
 	{
-		super(rsrc.getString(L10nConstants.keys.TRM_TERMSANDCONDITIONS));
+		super(getRsrc().getString(L10nConstants.keys.TRM_TERMSANDCONDITIONS));
 	}
 
 	public void show()
@@ -34,7 +34,7 @@ public class FormTandC extends MPForm
 		final Container cntnr = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 		//cntnr.addComponent(BorderLayout.CENTER, innercntnr);
 		//
-		final MPGrowTextArea tandc = new MPGrowTextArea(rsrc.getString(L10nConstants.keys.TRM_TERMS, new String[] { "\r\n\r\n", "\r\n\r\n" }));
+		final MPGrowTextArea tandc = new MPGrowTextArea(getRsrc().getString(L10nConstants.keys.TRM_TERMS, new String[] { "\r\n\r\n", "\r\n\r\n" }));
 		tandc.setScrollVisible(true);
 		cntnr.addComponent(tandc);
 		replaceContent(getContentPane(), cntnr, null);
@@ -55,7 +55,7 @@ public class FormTandC extends MPForm
 			}
 			else if (cmd == iAgreeCommand)
 			{
-				new FormSplash().show();
+				new FormOOBE().show();
 			}
 		}
 		else if (cmp != null)

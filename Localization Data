@@ -13,6 +13,10 @@
       <entry key="Command_Change" value="Change"/>
       <entry key="Command_Exit" value="Exit"/>
       <entry key="Command_ResendSMS" value="ResendSMS"/>
+      <entry key="Command_IAgree" value="I Agree"/>
+      <entry key="Command_Use" value="Use"/>
+      <entry key="Command_Back" value="Back"/>
+      <entry key="Command_Next" value="Next"/>
       <entry key="REG_Registering" value="Registering"/>
       <entry key="REG_TryingAgain" value="Trying Again"/>
       <entry key="REG_MESSAGEPLUS" value="Message+"/>
@@ -23,6 +27,12 @@
       <entry key="ACT_Activate" value="Activate"/>
       <entry key="TRM_TermsAndConditions" value="Terms &amp; Condiions"/>
       <entry key="TRM_Terms" value="You will always be able to send an SMS or broadcast message to any contact using [Vodafone Message+]{0}[Vodafone Message+] will also automatically enable you to enjoy a richer messaging experience when available based on the capability of your contact. Richer features will include Group Chat, 121 Chat and file, photo, video, location and ausio share, font size customization, richer emoticons and emoji support.{1}"/>
-      <entry key="Command_IAgree" value="I Agree"/>
+      <entry key="OOBE_WelcomeTo" value="Welcome to Message+, the quick and simple way to chat in real time and send text messages from one easy to use app."/>
+      <entry key="OOBE_MakeShortcut" value="Make a Homescreen shortcut for message+?"/>
+      <entry key="OOBE_YourName" value="Your name"/>
+      <entry key="OOBE_TakeAPhoto" value="Take a photo"/>
+      <entry key="OOBE_SelectYourPhoto" value="Select your photo"/>
+      <entry key="CONV_Hello" value="Hello :)"/>
+      <entry key="CONV_Welcome" value="Welcome to Message+"/>
    </locale>
 </locales>

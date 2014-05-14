@@ -4,51 +4,50 @@
 package forms;
 
 import lcl.L10nConstants;
-import main.GlobalData;
 import com.sun.lwuit.Button;
 import com.sun.lwuit.Command;
-import com.sun.lwuit.Component;
 import com.sun.lwuit.Container;
 import com.sun.lwuit.Display;
 import com.sun.lwuit.Label;
 import com.sun.lwuit.TextArea;
 import com.sun.lwuit.TextField;
 import com.sun.lwuit.events.ActionEvent;
-import com.sun.lwuit.events.DataChangedListener;
 import com.sun.lwuit.layouts.BoxLayout;
 import components.MPBorderlessLabel;
 import components.MPForm;
 import components.MPGrowTextArea;
-import components.MPTextFieldNoPrompt;
+import components.MPTextAreaWithTitle;
+import components.MPTextField;
+import components.MPTextFieldWithTitle;
 import components.StyleHelpers;
 
 /**
  * @author Alan
  * 
  */
-public class FormPMD1 extends MPForm implements DataChangedListener
+public class FormPMD1 extends MPForm
 {
-	protected final int		PMD1_UNINITTED		= -1;
-	protected final int		PMD1_ENTRY			= 0;
-	protected final int		PMD1_CORRECT		= 1;
-	protected final int		PMD1_COUNT			= 2;
-	protected int			PMD1_State			= PMD1_UNINITTED;
-	protected Container[]	containers			= new Container[PMD1_COUNT];
+	protected final int				PMD1_UNINITTED	= -1;
+	protected final int				PMD1_ENTRY		= 0;
+	protected final int				PMD1_CORRECT	= 1;
+	protected final int				PMD1_COUNT		= 2;
+	protected int					PMD1_State		= PMD1_UNINITTED;
+	protected Container[]			containers		= new Container[PMD1_COUNT];
 	//
-	private Label			lCountryRegion		= null;
-	private MPTextFieldNoPrompt		tfPhoneNumber		= null;
-	private Button			lPhoneNumberVerify	= null;
+	private final Label				lCountryRegion	= null;
+	//private MPTextFieldWithTitle	tfPhoneNumber		= null;
+	private MPTextAreaWithTitle		tfPhnNmbrVrfy	= null;
+	private MPTextFieldWithTitle	tfPhnNmbr		= null;
+	private Button					l				= null;
 	//
-	private final Command	okCommand			= new Command(rsrc.getString(L10nConstants.keys.COMMAND_OK));
-	//private final Command		okValidCommand			= new Command(rsrc.getString(L10nConstants.keys.COMMAND_OK));
-	private final Command	changeCommand		= new Command(rsrc.getString(L10nConstants.keys.COMMAND_CHANGE));
-	private final Command	exitCommand			= new Command(rsrc.getString(L10nConstants.keys.COMMAND_EXIT));
-	protected String		userPhoneNumber		= "";
+	private final Command			okCommand		= new Command(getRsrc().getString(L10nConstants.keys.COMMAND_OK));
+	private final Command			changeCommand	= new Command(getRsrc().getString(L10nConstants.keys.COMMAND_CHANGE));
+	private final Command			exitCommand		= new Command(getRsrc().getString(L10nConstants.keys.COMMAND_EXIT));
+	protected String				userPhoneNumber	= "";
 
-	// private Command cmdLogin = null;
 	public FormPMD1()
 	{
-		super(rsrc.getString(L10nConstants.keys.VYN_NUMBERTITLE));
+		super(getRsrc().getString(L10nConstants.keys.VYN_NUMBERTITLE));
 	}
 
 	public void show()
@@ -73,52 +72,30 @@ public class FormPMD1 extends MPForm implements DataChangedListener
 			PMD1_State = PMD1_ENTRY;
 			if (containers[PMD1_ENTRY] == null)
 			{
+				TextField.setUseNativeTextInput(false);
 				final Container cntnr = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 				//
-				final MPBorderlessLabel blEnterPhoneNumber = new MPBorderlessLabel(rsrc.getString(L10nConstants.keys.VYN_ENTERYOURNUMBER));
+				final MPBorderlessLabel blEnterPhoneNumber = new MPBorderlessLabel(getRsrc().getString(L10nConstants.keys.VYN_ENTERYOURNUMBER));
 				StyleHelpers.setMargin(blEnterPhoneNumber, 0, 0);
 				StyleHelpers.setPadding(blEnterPhoneNumber, 1, 1);
 				cntnr.addComponent(blEnterPhoneNumber);
 				//
-				final MPBorderlessLabel blCountryRegionTitle = new MPBorderlessLabel(rsrc.getString(L10nConstants.keys.VYN_COUNTRYREGION));
-				blCountryRegionTitle.setFocusable(false);
-				StyleHelpers.setMargin(blCountryRegionTitle, 5, 0);
-				StyleHelpers.setPadding(blCountryRegionTitle, 1, 1);
-				cntnr.addComponent(blCountryRegionTitle);
+				final MPTextFieldWithTitle tfCntryRgn = new MPTextFieldWithTitle(getRsrc().getString(L10nConstants.keys.VYN_COUNTRYREGION), "");
+				tfCntryRgn.getTfTextField().setHint(getRsrc().getString(L10nConstants.keys.VYN_COUNTRYREGION));
+				tfCntryRgn.setFocusable(false);
+				cntnr.addComponent(tfCntryRgn);
 				//
-				lCountryRegion = new Label(GlobalData.getLocale());
-				lCountryRegion.setFocusable(false);
-				StyleHelpers.setBorder(lCountryRegion, blckBorder);
-				StyleHelpers.setMargin(lCountryRegion, 0, 5);
-				StyleHelpers.setPadding(lCountryRegion, 7, 7);
-				cntnr.addComponent(lCountryRegion);
-				//
-				final MPBorderlessLabel blPhoneNumberTitle = new MPBorderlessLabel(rsrc.getString(L10nConstants.keys.VYN_PHONENUMBER));
-				blPhoneNumberTitle.setFocusable(false);
-				StyleHelpers.setMargin(blPhoneNumberTitle, 5, 0);
-				StyleHelpers.setPadding(blPhoneNumberTitle, 0, 0);
-				cntnr.addComponent(blPhoneNumberTitle);
-				//
-				tfPhoneNumber = new MPTextFieldNoPrompt();
+				tfPhnNmbr = new MPTextFieldWithTitle(getRsrc().getString(L10nConstants.keys.VYN_PHONENUMBER), userPhoneNumber);
 				TextField.setUseNativeTextInput(false);
-				//tfPhoneNumber = new TextField();
-				tfPhoneNumber.setText(userPhoneNumber);
-				tfPhoneNumber.setInputMode("123");
-				//private static String[] defaultInputModeOrder = {"Abc", "ABC", "abc", "123"};
-				tfPhoneNumber.setHint(rsrc.getString(L10nConstants.keys.VYN_ENTERNUMBER));
-				tfPhoneNumber.setConstraint(TextArea.PHONENUMBER);
-				StyleHelpers.setBorder(tfPhoneNumber, blckBorder);
-				StyleHelpers.setMargin(tfPhoneNumber, 0, 5);
-				StyleHelpers.setPadding(tfPhoneNumber, 4, 4);
-				tfPhoneNumber.addActionListener(this);
-				//tfPhoneNumber.addDataChangeListener(this);
-				//tfPhoneNumber.setReplaceMenu(false);
-				tfPhoneNumber.setSelectCommandText(rsrc.getString(L10nConstants.keys.COMMAND_OK));
-				
-				cntnr.addComponent(tfPhoneNumber);
-				tfPhoneNumber.requestFocus();
+				final MPTextField tf = tfPhnNmbr.getTfTextField();
+				tf.setHint(getRsrc().getString(L10nConstants.keys.VYN_ENTERNUMBER));
+				tf.setInputMode("123");
+				tf.setConstraint(TextArea.PHONENUMBER);
+				tf.addActionListener(this);
+				tfPhnNmbr.setSelectCommandText(getRsrc().getString(L10nConstants.keys.COMMAND_OK));
+				cntnr.addComponent(tfPhnNmbr);
 				//
-				final MPGrowTextArea gtaVerifyText = new MPGrowTextArea(rsrc.getString(L10nConstants.keys.VYN_TEXT));
+				final MPGrowTextArea gtaVerifyText = new MPGrowTextArea(getRsrc().getString(L10nConstants.keys.VYN_TEXT));
 				gtaVerifyText.setFocusable(false);
 				StyleHelpers.setMargin(gtaVerifyText, 5, 0);
 				StyleHelpers.setPadding(gtaVerifyText, 0, 0);
@@ -130,7 +107,7 @@ public class FormPMD1 extends MPForm implements DataChangedListener
 			replaceContent(getContentPane(), containers[PMD1_ENTRY], null);
 			setBackCommand(exitCommand);
 			setDefaultCommand(null);
-			tfPhoneNumber.requestFocus();
+			tfPhnNmbr.getTfTextField().requestFocus();
 			getSelectCommand().setEnabled(false);
 			revalidate();
 			repaint();
@@ -147,23 +124,21 @@ public class FormPMD1 extends MPForm implements DataChangedListener
 			{
 				final Container cntnr = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 				//
-				lPhoneNumberVerify = new Button(userPhoneNumber);
-				lPhoneNumberVerify.setUIID("Label");
-				lPhoneNumberVerify.setSelectCommandText(rsrc.getString(L10nConstants.keys.COMMAND_OK));
-				lPhoneNumberVerify.addActionListener(this);
-				StyleHelpers.setAlignment(lPhoneNumberVerify, Component.LEFT);
-				StyleHelpers.setBorder(lPhoneNumberVerify, blckBorder);
-				StyleHelpers.setMargin(lPhoneNumberVerify, 10, 10);
-				StyleHelpers.setPadding(lPhoneNumberVerify, 7, 7);
-				cntnr.addComponent(lPhoneNumberVerify);
-				//
-				final MPBorderlessLabel blNumberCorrect = new MPBorderlessLabel(rsrc.getString(L10nConstants.keys.VYN_NUMBERCORRECT));
-				cntnr.addComponent(blNumberCorrect);
-				//
+				tfPhnNmbrVrfy = new MPTextAreaWithTitle(getRsrc().getString(L10nConstants.keys.VYN_NUMBERCORRECT), userPhoneNumber);
+				tfPhnNmbrVrfy.setSelectCommandText(getRsrc().getString(L10nConstants.keys.COMMAND_OK));
+				tfPhnNmbrVrfy.setTitleAtTop(false);
+				cntnr.addComponent(tfPhnNmbrVrfy);
+				l = new Button();
+				l.setUIID("Label");
+				l.setFocusable(true);
+				l.setSelectCommandText(getRsrc().getString(L10nConstants.keys.COMMAND_OK));
+				l.addActionListener(this);
+				cntnr.addComponent(l);
 				containers[PMD1_CORRECT] = cntnr;
 			}
 			replaceContent(getContentPane(), containers[PMD1_CORRECT], null);
 			setBackCommand(changeCommand);
+			l.requestFocus();
 			revalidate();
 			repaint();
 		}
@@ -187,7 +162,15 @@ public class FormPMD1 extends MPForm implements DataChangedListener
 				{
 					if (isEntered())
 					{
+						tfPhnNmbr.setFocus(false);
 						showVerifyScreen();
+					}
+				}
+				else if (PMD1_State == PMD1_CORRECT)
+				{
+					if (isEntered())
+					{
+						new FormPMD2().show();
 					}
 				}
 			}
@@ -202,19 +185,19 @@ public class FormPMD1 extends MPForm implements DataChangedListener
 		}
 		else if (cmp != null)
 		{
-			if (cmp == lPhoneNumberVerify)
+			if (cmp == tfPhnNmbr.getTfTextField())
 			{
-				if (PMD1_State == PMD1_CORRECT)
-				{
-					new FormPMD2().show();
-				}
-			}
-			else if (cmp == tfPhoneNumber)
-			{
-				userPhoneNumber = tfPhoneNumber.getText();
+				userPhoneNumber = tfPhnNmbr.getTfTextField().getText();
 				if (isEntered())
 				{
 					showVerifyScreen();
+				}
+			}
+			else if (cmp.getClass() == Button.class)
+			{
+				if (isEntered())
+				{
+					new FormPMD2().show();
 				}
 			}
 		}
@@ -222,9 +205,8 @@ public class FormPMD1 extends MPForm implements DataChangedListener
 
 	private boolean isEntered()
 	{
-		return ((tfPhoneNumber.getText() != null) && (tfPhoneNumber.getText().length() > 0));
+		return ((tfPhnNmbr.getTfTextField().getText() != null) && (tfPhnNmbr.getTfTextField().getText().length() > 0));
 	}
-
 	/*private void showHideOK()
 	{
 		final int cnt = getCommandCount();
@@ -250,17 +232,4 @@ public class FormPMD1 extends MPForm implements DataChangedListener
 		}
 	}
 	*/
-	public void dataChanged(int arg0, int arg1)
-	{
-
-		
-		repaint();
-		revalidate();
-		repaint();
-		
-	
-		
-		
-		
-	}
 }

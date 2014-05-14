@@ -1,96 +1,39 @@
 package components;
 
-import com.sun.lwuit.TextArea;
+import com.sun.lwuit.TextField;
 
-public class MPTextField extends TextArea
+public class MPTextField extends TextField
 {
-	/**
-	 * 
-	 */
 	public MPTextField()
 	{
 		super();
-		initKTextField();
+		initMPTextField();
 	}
 
-	/**
-	 * @param text
-	 */
-	public MPTextField(final String text)
+	public MPTextField(int columns)
+	{
+		super(columns);
+		initMPTextField();
+	}
+
+	public MPTextField(String text)
 	{
 		super(text);
-		initKTextField();
+		initMPTextField();
 	}
 
-	/**
-	 * @param rows
-	 * @param columns
-	 */
-	public MPTextField(final int rows, final int columns)
+	public MPTextField(String text, int columns)
 	{
-		super(rows, columns);
-		initKTextField();
+		super(text, columns);
+		initMPTextField();
 	}
 
-	/**
-	 * @param text
-	 * @param maxSize
-	 */
-	public MPTextField(final String text, final int maxSize)
-	{
-		super(text, maxSize);
-		initKTextField();
-	}
-
-	/**
-	 * @param rows
-	 * @param columns
-	 * @param constraint
-	 */
-	public MPTextField(final int rows, final int columns, final int constraint)
-	{
-		super(rows, columns, constraint);
-		initKTextField();
-	}
-
-	/**
-	 * @param text
-	 * @param rows
-	 * @param columns
-	 */
-	public MPTextField(final String text, final int rows, final int columns)
-	{
-		super(text, rows, columns);
-		initKTextField();
-	}
-
-	/**
-	 * @param text
-	 * @param rows
-	 * @param columns
-	 * @param constraint
-	 */
-	public MPTextField(final String text, final int rows, final int columns, final int constraint)
-	{
-		super(text, rows, columns, constraint);
-		initKTextField();
-	}
-
-	private void initKTextField()
+	private void initMPTextField()
 	{
 		setSingleLineTextArea(true);
 		setPreferredH(40);
 		setGrowByContent(false);
 		setEditable(true);
-	}
-
-	public void setHandlesInput(boolean _handlesInput)
-	{
-		super.setHandlesInput(_handlesInput);
-	}
-
-	public void clear()
-	{
-		setText("");
+		StyleHelpers.setBorder(this, MPForm.blckBorder);
 	}
 }

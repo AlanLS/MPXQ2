@@ -28,6 +28,10 @@ public class L10nConstants {
 		public static final String COMMAND_CHANGE = "COMMAND_CHANGE";
 		public static final String COMMAND_EXIT = "COMMAND_EXIT";
 		public static final String COMMAND_RESENDSMS = "COMMAND_RESENDSMS";
+		public static final String COMMAND_IAGREE = "COMMAND_IAGREE";
+		public static final String COMMAND_USE = "COMMAND_USE";
+		public static final String COMMAND_BACK = "COMMAND_BACK";
+		public static final String COMMAND_NEXT = "COMMAND_NEXT";
 		public static final String REG_REGISTERING = "REG_REGISTERING";
 		public static final String REG_TRYINGAGAIN = "REG_TRYINGAGAIN";
 		public static final String REG_MESSAGEPLUS = "REG_MESSAGEPLUS";
@@ -38,7 +42,13 @@ public class L10nConstants {
 		public static final String ACT_ACTIVATE = "ACT_ACTIVATE";
 		public static final String TRM_TERMSANDCONDITIONS = "TRM_TERMSANDCONDITIONS";
 		public static final String TRM_TERMS = "TRM_TERMS";
-		public static final String COMMAND_IAGREE = "COMMAND_IAGREE";
+		public static final String OOBE_WELCOMETO = "OOBE_WELCOMETO";
+		public static final String OOBE_MAKESHORTCUT = "OOBE_MAKESHORTCUT";
+		public static final String OOBE_YOURNAME = "OOBE_YOURNAME";
+		public static final String OOBE_TAKEAPHOTO = "OOBE_TAKEAPHOTO";
+		public static final String OOBE_SELECTYOURPHOTO = "OOBE_SELECTYOURPHOTO";
+		public static final String CONV_HELLO = "CONV_HELLO";
+		public static final String CONV_WELCOME = "CONV_WELCOME";
 
     }
 }

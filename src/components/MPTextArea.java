@@ -17,7 +17,7 @@ public class MPTextArea extends TextArea
 	public MPTextArea()
 	{
 		super();
-		makeKTextArea();
+		makeMPTextArea();
 	}
 
 	/**
@@ -26,7 +26,7 @@ public class MPTextArea extends TextArea
 	public MPTextArea(final String text)
 	{
 		super(text);
-		makeKTextArea();
+		makeMPTextArea();
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class MPTextArea extends TextArea
 	public MPTextArea(final int rows, final int columns)
 	{
 		super(rows, columns);
-		makeKTextArea();
+		makeMPTextArea();
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class MPTextArea extends TextArea
 	public MPTextArea(final String text, final int maxSize)
 	{
 		super(text, maxSize);
-		makeKTextArea();
+		makeMPTextArea();
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class MPTextArea extends TextArea
 	public MPTextArea(final int rows, final int columns, final int constraint)
 	{
 		super(rows, columns, constraint);
-		makeKTextArea();
+		makeMPTextArea();
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class MPTextArea extends TextArea
 	public MPTextArea(final String text, final int rows, final int columns)
 	{
 		super(text, rows, columns);
-		makeKTextArea();
+		makeMPTextArea();
 	}
 
 	/**
@@ -80,12 +80,16 @@ public class MPTextArea extends TextArea
 	public MPTextArea(final String text, final int rows, final int columns, final int constraint)
 	{
 		super(text, rows, columns, constraint);
-		makeKTextArea();
+		makeMPTextArea();
 	}
 
-	private void makeKTextArea()
+	private void makeMPTextArea()
 	{
+		setSingleLineTextArea(true);
+		setPreferredH(40);
+		setGrowByContent(false);
 		setEditable(false);
+		StyleHelpers.setBorder(this, MPForm.blckBorder);
 	}
 
 	protected boolean isSelectableInteraction()
