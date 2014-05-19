@@ -24,7 +24,7 @@ import components.StyleHelpers;
 
 /**
  * @author Alan
- *
+ * 
  */
 public class FormOOBE extends MPForm
 {
@@ -40,14 +40,14 @@ public class FormOOBE extends MPForm
 	protected Container[]			containers		= new Container[OOBE_COUNT];
 	//
 	private CheckBox				cbCheckbox		= null;
-	//private MPTextFieldNoPrompt	tfYourName		= null;
+	// private MPTextFieldNoPrompt tfYourName = null;
 	private MPTextFieldWithTitle	tfYourName		= null;
-	private final Command			cmdNext			= new Command(getRsrc().getString(L10nConstants.keys.COMMAND_NEXT));
-	private final Command			cmdOK			= new Command(getRsrc().getString(L10nConstants.keys.COMMAND_OK));
-	private final Command			cmdUse			= new Command(getRsrc().getString(L10nConstants.keys.COMMAND_USE));
-	private final Command			cmdBack			= new Command(getRsrc().getString(L10nConstants.keys.COMMAND_BACK));
-	//private Label					lblChoose		= null;
-	//private final Label				lblImage		= null;
+	private final Command			cmdNext			= new Command(rsrc.getString(L10nConstants.keys.COMMAND_NEXT));
+	private final Command			cmdOK			= new Command(rsrc.getString(L10nConstants.keys.COMMAND_OK));
+	private final Command			cmdUse			= new Command(rsrc.getString(L10nConstants.keys.COMMAND_USE));
+	private final Command			cmdBack			= new Command(rsrc.getString(L10nConstants.keys.COMMAND_BACK));
+	// private Label lblChoose = null;
+	// private final Label lblImage = null;
 	private Button					btnTake			= null;
 	private Button					btnSelect		= null;
 	private String					userName		= null;
@@ -105,10 +105,10 @@ public class FormOOBE extends MPForm
 				final Label l = new Label("");
 				l.setPreferredH(Display.getInstance().getDisplayHeight() / 3);
 				cntnr.addComponent(BorderLayout.NORTH, l);
-				final MPGrowTextArea gtaWelcome = new MPGrowTextArea(getRsrc().getString(L10nConstants.keys.OOBE_WELCOMETO));
+				final MPGrowTextArea gtaWelcome = new MPGrowTextArea(rsrc.getString(L10nConstants.keys.OOBE_WELCOMETO));
 				bottomCntnr.addComponent(BorderLayout.NORTH, gtaWelcome);
 				//
-				final MPGrowTextArea gtaShortcut = new MPGrowTextArea(getRsrc().getString(L10nConstants.keys.OOBE_MAKESHORTCUT));
+				final MPGrowTextArea gtaShortcut = new MPGrowTextArea(rsrc.getString(L10nConstants.keys.OOBE_MAKESHORTCUT));
 				bottomCntnr.addComponent(BorderLayout.CENTER, gtaShortcut);
 				//
 				cbCheckbox = new CheckBox();
@@ -116,7 +116,8 @@ public class FormOOBE extends MPForm
 				//
 				cntnr.addComponent(BorderLayout.CENTER, bottomCntnr);
 				//
-				//bottomCntnr.addComponent(BorderLayout.SOUTH, new pageIndicator(0));
+				// bottomCntnr.addComponent(BorderLayout.SOUTH, new
+				// pageIndicator(0));
 				//
 				containers[OOBE_WELCOME] = cntnr;
 			}
@@ -145,17 +146,17 @@ public class FormOOBE extends MPForm
 				l.setPreferredH(Display.getInstance().getDisplayHeight() / 3);
 				cntnr.addComponent(BorderLayout.NORTH, l);
 				//
-				tfYourName = new MPTextFieldWithTitle(getRsrc().getString(L10nConstants.keys.OOBE_YOURNAME), "");
+				tfYourName = new MPTextFieldWithTitle(rsrc.getString(L10nConstants.keys.OOBE_YOURNAME), "");
 				TextField.setUseNativeTextInput(false);
 				final MPTextField tf = tfYourName.getTfTextField();
-				tf.setHint(getRsrc().getString(L10nConstants.keys.OOBE_YOURNAME));
+				tf.setHint(rsrc.getString(L10nConstants.keys.OOBE_YOURNAME));
 				tf.addActionListener(this);
-				tfYourName.setSelectCommandText(getRsrc().getString(L10nConstants.keys.COMMAND_OK));
+				tfYourName.setSelectCommandText(rsrc.getString(L10nConstants.keys.COMMAND_OK));
 				bottomCntnr.addComponent(tfYourName);
 				//
 				cntnr.addComponent(BorderLayout.CENTER, bottomCntnr);
 				//
-				//cntnr.addComponent(BorderLayout.SOUTH, new pageIndicator(1));
+				// cntnr.addComponent(BorderLayout.SOUTH, new pageIndicator(1));
 				//
 				containers[OOBE_YOURNAME] = cntnr;
 			}
@@ -184,23 +185,24 @@ public class FormOOBE extends MPForm
 				lblImage.setFocusable(false);
 				bottomCntnr.addComponent(lblImage);
 				//
-				//Label l = new Label("");
-				//l.setPreferredH(Display.getInstance().getDisplayHeight() / 3);
-				//cntnr.addComponent(BorderLayout.NORTH, l);
+				// Label l = new Label("");
+				// l.setPreferredH(Display.getInstance().getDisplayHeight() /
+				// 3);
+				// cntnr.addComponent(BorderLayout.NORTH, l);
 				//
-				btnTake = new Button(getRsrc().getString(L10nConstants.keys.OOBE_TAKEAPHOTO));
+				btnTake = new Button(rsrc.getString(L10nConstants.keys.OOBE_TAKEAPHOTO));
 				btnTake.addActionListener(this);
 				StyleHelpers.setAlignment(btnTake, Component.CENTER);
 				bottomCntnr.addComponent(btnTake);
 				//
-				btnSelect = new Button(getRsrc().getString(L10nConstants.keys.OOBE_SELECTYOURPHOTO));
+				btnSelect = new Button(rsrc.getString(L10nConstants.keys.OOBE_SELECTYOURPHOTO));
 				StyleHelpers.setAlignment(btnSelect, Component.CENTER);
 				btnSelect.addActionListener(this);
 				bottomCntnr.addComponent(btnSelect);
 				//
 				cntnr.addComponent(BorderLayout.CENTER, bottomCntnr);
 				//
-				//cntnr.addComponent(BorderLayout.SOUTH, new pageIndicator(2));
+				// cntnr.addComponent(BorderLayout.SOUTH, new pageIndicator(2));
 				//
 				containers[OOBE_TAKECHOOSE] = cntnr;
 			}
@@ -221,29 +223,29 @@ public class FormOOBE extends MPForm
 			OOBE_State = OOBE_SHOWPIC;
 			if (containers[OOBE_SHOWPIC] == null)
 			{
-				//final Container cntnr = new Container(new BorderLayout());
+				// final Container cntnr = new Container(new BorderLayout());
 				final Container cntnr = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 				//
 				final Label lblImage = new Label(userImage);
 				StyleHelpers.setAlignment(lblImage, Component.CENTER);
 				lblImage.setFocusable(false);
-				lblImage.setSelectCommandText(getRsrc().getString(L10nConstants.keys.COMMAND_USE));
+				lblImage.setSelectCommandText(rsrc.getString(L10nConstants.keys.COMMAND_USE));
 				cntnr.addComponent(lblImage);
 				//
 				final Label l = new Label(userName);
 				l.setFocusable(false);
 				StyleHelpers.setAlignment(l, Component.CENTER);
-				l.setSelectCommandText(getRsrc().getString(L10nConstants.keys.COMMAND_USE));
+				l.setSelectCommandText(rsrc.getString(L10nConstants.keys.COMMAND_USE));
 				cntnr.addComponent(l);
 				dummy = new Button();
 				dummy.setUIID("Label");
 				dummy.setFocusable(true);
-				dummy.setSelectCommandText(getRsrc().getString(L10nConstants.keys.COMMAND_OK));
+				dummy.setSelectCommandText(rsrc.getString(L10nConstants.keys.COMMAND_OK));
 				dummy.addActionListener(this);
 				cntnr.addComponent(dummy);
 				//
-				//cntnr.addComponent(BorderLayout.CENTER, bottomCntnr);
-				//cntnr.addComponent(BorderLayout.SOUTH, new pageIndicator(2));
+				// cntnr.addComponent(BorderLayout.CENTER, bottomCntnr);
+				// cntnr.addComponent(BorderLayout.SOUTH, new pageIndicator(2));
 				//
 				containers[OOBE_SHOWPIC] = cntnr;
 			}

@@ -15,7 +15,7 @@ public class GlobalData
 		return GlobalData.theInstance;
 	}
 
-	//--------------------------------------------------------------
+	// --------------------------------------------------------------
 	private static String	locale	= new String("en-US");
 
 	public static String getLocale()
@@ -28,7 +28,7 @@ public class GlobalData
 		GlobalData.locale = locale;
 	}
 
-	//---------------------------------------------------------------
+	// ---------------------------------------------------------------
 	private static L10nResources	rsrc	= L10nResources.getL10nResources(locale);
 
 	public static L10nResources getRsrc()
@@ -36,12 +36,11 @@ public class GlobalData
 		return rsrc;
 	}
 
-	public static void setRsrc(L10nResources rsrc)
-	{
-		GlobalData.rsrc = rsrc;
-	}
-
-	//-------------------------------------------------------------------
+	// public static void setRsrc(L10nResources rsrc)
+	// {
+	// GlobalData.rsrc = rsrc;
+	// }
+	// -------------------------------------------------------------------
 	private static boolean	isDebug	= false;
 
 	public static void setDebug(boolean isDebug)
@@ -54,7 +53,7 @@ public class GlobalData
 		return isDebug;
 	}
 
-	//----------------------------------------------------------
+	// ----------------------------------------------------------
 	protected GlobalData()
 	{
 		init();

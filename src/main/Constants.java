@@ -5,7 +5,7 @@ package main;
 
 /**
  * @author Alan
- *
+ * 
  */
 public final class Constants
 {

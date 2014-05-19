@@ -18,20 +18,20 @@ import com.sun.lwuit.plaf.Style;
 
 abstract public class MPForm extends Form implements ActionListener, FocusListener
 {
-	protected Hashtable				localExtras;
-	protected Component				focusedComponent		= null;
-	protected Component				priorFocusedComponent	= null;
-	protected Component				cmp						= null;
-	protected Command				cmd						= null;
-	protected Class					priorClass				= null;
-	protected String				priorTitle				= null;
-	CommonTransitions				transitIn				= null;								// CommonTransitions.createFade(125);
-	private static L10nResources	rsrc					= GlobalData.getRsrc();
-	public final static Border		yllwBorder				= Border.createLineBorder(3, 0xFFFF00);	// yellow
-	public final static Border		blckBorder				= Border.createLineBorder(1, 0x000000);	// yellow
-	public final static Border		nrmlBorder				= Border.createLineBorder(2, 0xdadada);
+	protected Hashtable			localExtras;
+	protected Component			focusedComponent		= null;
+	protected Component			priorFocusedComponent	= null;
+	protected Component			cmp						= null;
+	protected Command			cmd						= null;
+	protected Class				priorClass				= null;
+	protected String			priorTitle				= null;
+	CommonTransitions			transitIn				= null;								// CommonTransitions.createFade(125);
+	public static L10nResources	rsrc					= GlobalData.getRsrc();
+	public final static Border	yllwBorder				= Border.createLineBorder(3, 0xFFFF00); // yellow
+	public final static Border	blckBorder				= Border.createLineBorder(1, 0x000000); // yellow
+	public final static Border	nrmlBorder				= Border.createLineBorder(2, 0xdadada);
 
-	//protected final static Label dummyContainer = new Label();
+	// protected final static Label dummyContainer = new Label();
 	public MPForm(String title)
 	{
 		super(title);
@@ -87,7 +87,7 @@ abstract public class MPForm extends Form implements ActionListener, FocusListen
 		}
 		System.gc();
 		System.out.println("NEW CLASS= " + getClass().toString());
-		//addComponent(dummyContainer);
+		// addComponent(dummyContainer);
 		removeCommand(getBackCommand());
 		setCyclicFocus(false);
 		addCommandListener(this);
@@ -109,7 +109,7 @@ abstract public class MPForm extends Form implements ActionListener, FocusListen
 	public void focusGained(final Component arg0)
 	{
 		focusedComponent = arg0;
-		System.out.println("Focus is on= " + focusedComponent.getName());
+		System.out.println("Focus is on= " + arg0);
 	}
 
 	public void focusLost(final Component arg0)
@@ -191,15 +191,5 @@ abstract public class MPForm extends Form implements ActionListener, FocusListen
 		// }
 		// }
 		// }
-	}
-
-	public static L10nResources getRsrc()
-	{
-		return rsrc;
-	}
-
-	public static void setRsrc(L10nResources rsrc)
-	{
-		MPForm.rsrc = rsrc;
 	}
 }

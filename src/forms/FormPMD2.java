@@ -21,7 +21,7 @@ import components.StyleHelpers;
 
 /**
  * @author Alan
- *
+ * 
  */
 public class FormPMD2 extends MPForm
 {
@@ -36,13 +36,13 @@ public class FormPMD2 extends MPForm
 	private MPTextFieldWithTitle	tfPinNo				= null;
 	private MPBorderlessLabel		lTryAgain			= null;
 	//
-	private final Command			cancelCommand		= new Command(getRsrc().getString(L10nConstants.keys.COMMAND_CANCEL));
+	private final Command			cancelCommand		= new Command(rsrc.getString(L10nConstants.keys.COMMAND_CANCEL));
 	protected String				PINNo				= null;
 
 	// private Command cmdLogin = null;
 	public FormPMD2()
 	{
-		super(getRsrc().getString(L10nConstants.keys.REG_MESSAGEPLUS));
+		super(rsrc.getString(L10nConstants.keys.REG_MESSAGEPLUS));
 	}
 
 	public void show()
@@ -71,13 +71,13 @@ public class FormPMD2 extends MPForm
 			PMD2_State = PMD2_REGISTERING_1;
 			if (containers[PMD2_REGISTERING_1] == null)
 			{
-				//final Container cntnr = new Container(new BorderLayout());
+				// final Container cntnr = new Container(new BorderLayout());
 				final Container cntnr = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-				//cntnr.addComponent(BorderLayout.CENTER, innercntnr);
+				// cntnr.addComponent(BorderLayout.CENTER, innercntnr);
 				//
-				cntnr.addComponent(new MPBorderlessLabel(getRsrc().getString(L10nConstants.keys.REG_REGISTERING)));
+				cntnr.addComponent(new MPBorderlessLabel(rsrc.getString(L10nConstants.keys.REG_REGISTERING)));
 				//
-				lTryAgain = new MPBorderlessLabel(getRsrc().getString(L10nConstants.keys.REG_TRYINGAGAIN));
+				lTryAgain = new MPBorderlessLabel(rsrc.getString(L10nConstants.keys.REG_TRYINGAGAIN));
 				cntnr.addComponent(lTryAgain);
 				//
 				containers[PMD2_REGISTERING_1] = cntnr;
@@ -112,48 +112,46 @@ public class FormPMD2 extends MPForm
 		if (PMD2_State != PMD2_ACTIVATE)
 		{
 			MPActivityIndicator.getInstance().uninstallPane();
-			setTitle(getRsrc().getString(L10nConstants.keys.ACT_ACTIVATE));
+			setTitle(rsrc.getString(L10nConstants.keys.ACT_ACTIVATE));
 			removeAllCommands();
 			PMD2_State = PMD2_ACTIVATE;
 			if (containers[PMD2_ACTIVATE] == null)
 			{
 				final Container cntnr = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 				//
-				final MPGrowTextArea gtaActivateText = new MPGrowTextArea(getRsrc().getString(L10nConstants.keys.ACT_SENTSMS));
+				final MPGrowTextArea gtaActivateText = new MPGrowTextArea(rsrc.getString(L10nConstants.keys.ACT_SENTSMS));
 				gtaActivateText.setFocusable(false);
-				//StyleHelpers.setMargin(gtaActivateText, 5, 5);
+				// StyleHelpers.setMargin(gtaActivateText, 5, 5);
 				StyleHelpers.setPadding(gtaActivateText, 0, 0);
 				cntnr.addComponent(gtaActivateText);
-				tfPinNo = new MPTextFieldWithTitle(getRsrc().getString(L10nConstants.keys.ACT_ENTERPINNUMBER), "");
+				tfPinNo = new MPTextFieldWithTitle(rsrc.getString(L10nConstants.keys.ACT_ENTERPINNUMBER), "");
 				TextField.setUseNativeTextInput(false);
 				final MPTextField tf = tfPinNo.getTfTextField();
-				tf.setHint(getRsrc().getString(L10nConstants.keys.ACT_ENTERPINNUMBER));
+				tf.setHint(rsrc.getString(L10nConstants.keys.ACT_ENTERPINNUMBER));
 				tf.addActionListener(this);
-				tfPinNo.setSelectCommandText(getRsrc().getString(L10nConstants.keys.COMMAND_OK));
+				tfPinNo.setSelectCommandText(rsrc.getString(L10nConstants.keys.COMMAND_OK));
 				cntnr.addComponent(tfPinNo);
 				/*
-				
-				final MPBorderlessLabel blPinNumberTitle = new MPBorderlessLabel(rsrc.getString(L10nConstants.keys.ACT_ENTERPINNUMBER));
-				blPinNumberTitle.setFocusable(false);
-				StyleHelpers.setMargin(blPinNumberTitle, 5, 0);
-				StyleHelpers.setPadding(blPinNumberTitle, 0, 0);
-				cntnr.addComponent(blPinNumberTitle);
-				//
-				tfPinNo = new MPTextFieldNoPrompt();
-				tfPinNo.setText("");
-				tfPinNo.setHint(rsrc.getString(L10nConstants.keys.ACT_ENTERPINNUMBER));
-				StyleHelpers.setBorder(tfPinNo, blckBorder);
-				StyleHelpers.setMargin(tfPinNo, 0, 5);
-				StyleHelpers.setPadding(tfPinNo, 4, 4);
-				tfPinNo.addActionListener(this);
-				cntnr.addComponent(tfPinNo);
-				tfPinNo.requestFocus();
-				//
-				  
+				 * 
+				 * final MPBorderlessLabel blPinNumberTitle = new
+				 * MPBorderlessLabel
+				 * (rsrc.getString(L10nConstants.keys.ACT_ENTERPINNUMBER));
+				 * blPinNumberTitle.setFocusable(false);
+				 * StyleHelpers.setMargin(blPinNumberTitle, 5, 0);
+				 * StyleHelpers.setPadding(blPinNumberTitle, 0, 0);
+				 * cntnr.addComponent(blPinNumberTitle); // tfPinNo = new
+				 * MPTextFieldNoPrompt(); tfPinNo.setText("");
+				 * tfPinNo.setHint(rsrc
+				 * .getString(L10nConstants.keys.ACT_ENTERPINNUMBER));
+				 * StyleHelpers.setBorder(tfPinNo, blckBorder);
+				 * StyleHelpers.setMargin(tfPinNo, 0, 5);
+				 * StyleHelpers.setPadding(tfPinNo, 4, 4);
+				 * tfPinNo.addActionListener(this); cntnr.addComponent(tfPinNo);
+				 * tfPinNo.requestFocus(); //
 				 */
 				containers[PMD2_ACTIVATE] = cntnr;
 			}
-			//	
+			//
 			replaceContent(getContentPane(), containers[PMD2_ACTIVATE], null);
 			tfPinNo.requestFocus();
 			setBackCommand(cancelCommand);
@@ -193,7 +191,7 @@ public class FormPMD2 extends MPForm
 		}
 	}
 
-	//////////////////////temp
+	// ////////////////////temp
 	public class RegTimerTask extends TimerTask
 	{
 		FormPMD2	frm	= null;

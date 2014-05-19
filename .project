@@ -11,11 +11,6 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.eclipse.mtj.core.preprocessor</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
 			<name>org.eclipse.jdt.core.javabuilder</name>
 			<arguments>
 			</arguments>
@@ -34,7 +29,6 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.mtj.core.nature</nature>
-		<nature>org.eclipse.mtj.core.preprocessingNature</nature>
 		<nature>org.eclipse.mtj.core.l10nNature</nature>
 	</natures>
 </projectDescription>

@@ -28,8 +28,9 @@ public class MPTextFieldNoPrompt extends MPTextField
 	{
 		return super.installCommands(clear, null);
 	}
-	//protected void removeCommands(Command clear, Command t9, Command originalClear)
-	//{
-	//	
-	//}
+	// protected void removeCommands(Command clear, Command t9, Command
+	// originalClear)
+	// {
+	//
+	// }
 }

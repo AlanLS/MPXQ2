@@ -8,7 +8,7 @@ import com.sun.lwuit.Label;
 
 /**
  * @author Alan
- *
+ * 
  */
 public class MPBorderlessLabel extends Label
 {

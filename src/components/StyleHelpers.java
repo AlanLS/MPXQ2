@@ -100,12 +100,12 @@ public class StyleHelpers
 		cmp.getPressedStyle().setBorder(brdr);
 	}
 
-	//public static void setBorder(final Component cmp, final Border b)
-	//{
-	//	cmp.getSelectedStyle().setBorder(b);
-	//	cmp.getUnselectedStyle().setBorder(b);
-	//	cmp.getPressedStyle().setBorder(b);
-	//}
+	// public static void setBorder(final Component cmp, final Border b)
+	// {
+	// cmp.getSelectedStyle().setBorder(b);
+	// cmp.getUnselectedStyle().setBorder(b);
+	// cmp.getPressedStyle().setBorder(b);
+	// }
 	public static void setFont(final Component cmp, final Font f)
 	{
 		cmp.getSelectedStyle().setFont(f);

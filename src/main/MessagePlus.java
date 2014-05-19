@@ -10,7 +10,6 @@ import com.sun.lwuit.Display;
 import com.sun.lwuit.List;
 import com.sun.lwuit.TextField;
 import com.sun.lwuit.events.ActionEvent;
-import com.sun.lwuit.io.Storage;
 import com.sun.lwuit.plaf.Border;
 import com.sun.lwuit.plaf.Style;
 import com.sun.lwuit.plaf.UIManager;
@@ -27,41 +26,26 @@ public class MessagePlus extends MIDlet
 	{
 		// ApplicationData.setTheMidlet(this);
 		Display.init(this);
-		//TextField.setUseNativeTextInput(false);
+		// TextField.setUseNativeTextInput(false);
 		// Display.getInstance().setTouchScreenDevice(false);
 		// Display.getInstance().setPureTouch(false);
-		//Display.getInstance().setThirdSoftButton(true);
+		// Display.getInstance().setThirdSoftButton(true);
 		//
 		GlobalData.getInstance();
 		System.out.println("Start");
 		//
 		// if (!Storage.isInitialized())
 		// {
-		/*		Storage.init("MPPersist");
-				// }
-				Storage.getInstance();
-				try
-				{
-					final String[] ss = Storage.getInstance().listEntries();
-					System.out.println("Storage:");
-					for (int i = 0; i < ss.length; ++i)
-					{
-						final Object obj = Storage.getInstance().readObject(ss[i].toString());
-						if (obj != null)
-						{
-							System.out.println(ss[i].toString() + " = " + obj.toString());
-						}
-						else
-						{
-							// Storage.getInstance().clearStorage();
-						}
-					}
-					System.out.println("End Storage");
-				}
-				catch (final Exception e)
-				{
-				}
-		*/
+		/*
+		 * Storage.init("MPPersist"); // } Storage.getInstance(); try { final
+		 * String[] ss = Storage.getInstance().listEntries();
+		 * System.out.println("Storage:"); for (int i = 0; i < ss.length; ++i) {
+		 * final Object obj =
+		 * Storage.getInstance().readObject(ss[i].toString()); if (obj != null)
+		 * { System.out.println(ss[i].toString() + " = " + obj.toString()); }
+		 * else { // Storage.getInstance().clearStorage(); } }
+		 * System.out.println("End Storage"); } catch (final Exception e) { }
+		 */
 		/*
 		 * String txt = (
 		 * "To be, or not to be, that is the question: Whether 'tis Nobler in the mind to sufferThe Slings and Arrows of outrageous Fortune, Or to take Arms against a Sea of troubles, And by opposing end them: to die, to sleep No more; and by a sleep, to say we end The Heart-ache, and the thousand Natural shocks That Flesh is heir to? 'Tis a consummation Devoutly to be wished. To die to sleep, To sleep, perchance to Dream"
@@ -121,7 +105,7 @@ public class MessagePlus extends MIDlet
 	public void destroyApp(final boolean unconditional)
 	{
 		System.out.println("DESTROY APP");
-		Storage.getInstance().flushStorageCache();
+		// Storage.getInstance().flushStorageCache();
 		// KNetworkManager.getInstance().shutdown();
 		// UploadedRMS.getInstance().closeTheStore();
 		// BulkRMS.getInstance().clearTheStore();

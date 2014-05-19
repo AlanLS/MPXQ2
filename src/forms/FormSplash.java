@@ -65,11 +65,12 @@ public class FormSplash extends Form
 			timer = null;
 			cancel();
 			new mainTab().show();
+			// new FormPMD1().show();
 			/*
 			 * // if (ApplicationData.getCASSessionToken() != null) { // we have
 			 * a previous session ApplicationData.getAccessToken();
-			 * Storage.getInstance().flushStorageCache(); final MsgPlusCloud kk =
-			 * ApplicationData.getCloudData(); if (kk != null) {
+			 * Storage.getInstance().flushStorageCache(); final MsgPlusCloud kk
+			 * = ApplicationData.getCloudData(); if (kk != null) {
 			 * ApplicationData.getAccountInfo(); if
 			 * (UploadedRMS.recordStoreExists()) { // new
 			 * UploadAutoUploads().loadAutoUploads(); new UploadFiles(); } }

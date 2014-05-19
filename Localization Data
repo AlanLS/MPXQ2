@@ -15,8 +15,20 @@
       <entry key="Command_ResendSMS" value="ResendSMS"/>
       <entry key="Command_IAgree" value="I Agree"/>
       <entry key="Command_Use" value="Use"/>
+      <entry key="Command_Profile" value="Profile"/>
+      <entry key="Command_NewChat" value="New chat"/>
       <entry key="Command_Back" value="Back"/>
+      <entry key="Command_Delete" value="Delete"/>
       <entry key="Command_Next" value="Next"/>
+      <entry key="Command_GroupInfo" value="Group info"/>
+      <entry key="Command_Settings" value="Settings"/>
+      <entry key="Command_AddToGroup" value="Add to group"/>
+      <entry key="Command_NewShout" value="New shout"/>
+      <entry key="Command_Done" value="Done"/>
+      <entry key="Command_NewGroup" value="New group"/>
+      <entry key="Command_SendMessage" value="Send message"/>
+      <entry key="Command_AddToShout" value="Add to shout"/>
+      <entry key="Command_Search" value="Search"/>
       <entry key="REG_Registering" value="Registering"/>
       <entry key="REG_TryingAgain" value="Trying Again"/>
       <entry key="REG_MESSAGEPLUS" value="Message+"/>
@@ -34,5 +46,11 @@
       <entry key="OOBE_SelectYourPhoto" value="Select your photo"/>
       <entry key="CONV_Hello" value="Hello :)"/>
       <entry key="CONV_Welcome" value="Welcome to Message+"/>
+      <entry key="GRP_YouNeedToAdd" value="You need to add your contacts to create a group or to send a shout."/>
+      <entry key="GRP_CreateAGroup" value="Create a group"/>
+      <entry key="GRP_CreateAShoutList" value="Create a shout list"/>
+      <entry key="GRP_SelectContacts" value="Select contacts {0}"/>
+      <entry key="GRP_GroupInfo" value="Group Info"/>
+      <entry key="GRP_Info" value="Info"/>
    </locale>
 </locales>
