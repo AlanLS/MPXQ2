@@ -3,4 +3,5 @@ MIDlet-Vendor: ShortHand
 MIDlet-Jar-URL: Message+.jar
 MicroEdition-Configuration: CLDC-1.1
 MicroEdition-Profile: MIDP-2.0
-MIDlet-Name: Message+ MIDlet Suite
+MIDlet-1: Message+,,main.MessagePlus
+MIDlet-Name: Message+

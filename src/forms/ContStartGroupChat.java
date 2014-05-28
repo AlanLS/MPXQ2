@@ -6,17 +6,21 @@ package forms;
 import lcl.L10nConstants;
 import main.GlobalData;
 import com.sun.lwuit.Button;
+import com.sun.lwuit.Command;
+import com.sun.lwuit.Component;
 import com.sun.lwuit.events.ActionEvent;
+import com.sun.lwuit.events.ActionListener;
 import com.sun.lwuit.layouts.BoxLayout;
 import components.MPContainer;
 import components.MPForm;
 import components.MPGrowTextArea;
+import components.StyleHelpers;
 
 /**
  * @author Alan
  *
  */
-public class ContStartGroupChat extends MPContainer
+public class ContStartGroupChat extends MPContainer implements ActionListener
 {
 	private Button	btnCrtGrp	= null;
 	private Button	btnCrtSht	= null;
@@ -24,20 +28,21 @@ public class ContStartGroupChat extends MPContainer
 	public ContStartGroupChat(MPForm _parentForm)
 	{
 		super(_parentForm);
-	}
-
-	public void initializeThis()
-	{
-		deInitializeThis();
-		//
+		parentForm.setDefaultCommand(null);
 		parentForm.addCommandListener(this);
 		((mainTab) parentForm).lastListener = this;
 		//
-		setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-		//final MPBorderlessLabel lbl = new MPBorderlessLabel("");
-		//lbl.setPreferredH(20);
-		//addComponent(lbl);
+		//parentForm.addCommand(cmdSearch);
+		//parentForm.addCommand(cmdSettings);
+		//parentForm.addCommand(cmdDelete);
+		//parentForm.addCommand(cmdProfile);
+		//parentForm.addCommand(cmdNewChat);
 		//
+		//
+		//
+		setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+		StyleHelpers.removeMargins(this);
+		StyleHelpers.removePadding(this);
 		final MPGrowTextArea lblMsg = new MPGrowTextArea(GlobalData.getRsrc().getString(L10nConstants.keys.GRP_YOUNEEDTOADD));
 		lblMsg.setFocusable(false);
 		addComponent(lblMsg);
@@ -53,15 +58,11 @@ public class ContStartGroupChat extends MPContainer
 		btnCrtGrp.requestFocus();
 	}
 
-	public void deInitializeThis()
-	{
-		removeAll();
-		System.gc();
-	}
-
 	public void actionPerformed(ActionEvent arg0)
 	{
-		super.actionPerformed(arg0);
+		final Component cmp = arg0.getComponent();
+		final Command cmd = arg0.getCommand();
+		System.out.println("cmd= " + cmd + "  cmp= " + cmp);
 		if (cmd != null)
 		{
 			System.out.println("GROUPCHAT_ " + cmd.getCommandName());

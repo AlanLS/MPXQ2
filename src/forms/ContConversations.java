@@ -3,6 +3,7 @@ package forms;
 import java.util.Hashtable;
 import lcl.L10nConstants;
 import main.GlobalData;
+import com.sun.lwuit.Button;
 import com.sun.lwuit.Command;
 import com.sun.lwuit.Component;
 import com.sun.lwuit.Container;
@@ -21,16 +22,20 @@ import components.StyleHelpers;
 
 public class ContConversations extends MPListContainer
 {
-	private Container	cntrHello	= null;
-	private Command		cmdNewChat	= null;
-	private Command		cmdProfile	= null;
-	private Command		cmdDelete	= null;
-	private Command		cmdSettings	= null;
-	private Command		cmdSearch	= null;
+	private Container		cntrHello	= null;
+	private Command			cmdNewChat	= null;
+	private Command			cmdProfile	= null;
+	private Command			cmdDelete	= null;
+	private Command			cmdSettings	= null;
+	private Command			cmdSearch	= null;
+	private Command			cmdSelect	= null;
+	private final Button	btnHello	= null;
 
 	public ContConversations(mainTab _parentForm)
 	{
 		super(_parentForm);
+		setScrollable(false);
+		setLayout(new BorderLayout());
 		setFocusable(false);
 		//addFocusListener(this);
 		cmdNewChat = new Command(rsrc.getString(L10nConstants.keys.COMMAND_NEWCHAT));
@@ -38,11 +43,8 @@ public class ContConversations extends MPListContainer
 		cmdDelete = new Command(rsrc.getString(L10nConstants.keys.COMMAND_DELETE));
 		cmdSettings = new Command(rsrc.getString(L10nConstants.keys.COMMAND_SETTINGS));
 		cmdSearch = new Command(rsrc.getString(L10nConstants.keys.COMMAND_SEARCH));
-	}
-
-	public void initializeThis()
-	{
-		deInitializeThis();
+		cmdSelect = new Command(rsrc.getString(L10nConstants.keys.COMMAND_SELECT));
+		//deInitializeThis();
 		//
 		parentForm.addCommandListener(this);
 		((mainTab) parentForm).lastListener = this;
@@ -53,7 +55,7 @@ public class ContConversations extends MPListContainer
 		parentForm.addCommand(cmdProfile);
 		parentForm.addCommand(cmdNewChat);
 		//
-		setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+		//setLayout(new BoxLayout(BoxLayout.Y_AXIS));
 		StyleHelpers.removeMargins(this);
 		StyleHelpers.removePadding(this);
 		//
@@ -61,18 +63,26 @@ public class ContConversations extends MPListContainer
 		cntrHello.setUIID("ListRenderer");
 		StyleHelpers.removeMargins(cntrHello);
 		StyleHelpers.removePadding(cntrHello);
+		StyleHelpers.setBgColor(cntrHello, 0xFFFFFF);
 		cntrHello.setFocusable(true);
 		cntrHello.addFocusListener(this);
-		//
 		final Image img = Image.createImage(40, 40, 0x777777);
-		final Label lblImg = new Label(img);
-		StyleHelpers.removeMargins(lblImg);
-		StyleHelpers.removePadding(lblImg);
-		cntrHello.addComponent(BorderLayout.WEST, lblImg);
+		final Button btnHello = new Button(img);
+		btnHello.setUIID("Label");
+		cntrHello.setLabelForComponent(btnHello);
+		StyleHelpers.setBorder(btnHello, null);
+		StyleHelpers.removeMargins(btnHello);
+		StyleHelpers.removePadding(btnHello);
+		btnHello.setFocusable(true);
+		btnHello.addFocusListener(this);
+		//cntrHello.setLeadComponent(btnHello);
+		btnHello.addActionListener(this);
+		cntrHello.addComponent(BorderLayout.WEST, btnHello);
 		//
 		final Container cntnrText = new Container(new BorderLayout());
 		StyleHelpers.removeMargins(cntnrText);
 		StyleHelpers.removePadding(cntnrText);
+		StyleHelpers.setBgTransparency(cntnrText, 255);
 		final MPBorderlessLabel lblName = new MPBorderlessLabel();
 		lblName.setText(GlobalData.getRsrc().getString(L10nConstants.keys.CONV_HELLO));
 		StyleHelpers.setFont(lblName, Fonts.SmallBoldFont);
@@ -83,30 +93,31 @@ public class ContConversations extends MPListContainer
 		cntnrText.addComponent(BorderLayout.SOUTH, lblMsg);
 		//
 		cntrHello.addComponent(BorderLayout.CENTER, cntnrText);
-		addComponent(cntrHello);
+		addComponent(BorderLayout.NORTH, cntrHello);
+		revalidate();
 		//
+		final Container cntnrList = new Container(new BorderLayout());
+		cntnrList.setScrollable(false);
+		//cntnrList.setScrollableX(false);
 		theList = new List(createGenericData());
-		theList.setRenderer(new GenericListCellRenderer(createRendererContainer(), createRendererContainer()));
+		theList.setRenderer(new GenericListCellRenderer(createRendererContainer(true), createRendererContainer(false)));
 		theList.setSelectedIndex(0);
 		StyleHelpers.removeMargins(theList);
 		StyleHelpers.removePadding(theList);
 		theList.setFocusable(true);
-		addComponent(theList);
-		// theList.setRenderer(new
-		// ConvInboxCellRenderer(createRendererContainer(),
-		// createRendererContainer()));
+		theList.addActionListener(this);
+		//theList.setFixedSelection(List.);
+		cntnrList.addComponent(BorderLayout.NORTH, theList);
+		addComponent(BorderLayout.CENTER, cntnrList);
 		//
+//		cntrHello.setLeadComponent(btnHello);
+		cntrHello.setLeadComponent(btnHello);
+		cntrHello.requestFocus();
+		revalidate();
+		repaint();
 	}
 
-	public void deInitializeThis()
-	{
-		removeAll();
-		cntrHello = null;
-		theList = null;
-		System.gc();
-	}
-
-	private Container createRendererContainer()
+	private Container createRendererContainer(boolean highlight)
 	{
 		final Container c = new Container(new BorderLayout());
 		c.setUIID("ListRenderer");
@@ -115,10 +126,10 @@ public class ContConversations extends MPListContainer
 		//
 		final Image img = Image.createImage(40, 40, 0x777777);
 		final Label lblImg = new Label(img);
-		// lblImg.setFocusable(true);
 		lblImg.setName("Image_fixed");
 		StyleHelpers.removeMargins(lblImg);
 		StyleHelpers.removePadding(lblImg);
+		//
 		c.addComponent(BorderLayout.WEST, lblImg);
 		//
 		/*
@@ -144,6 +155,41 @@ public class ContConversations extends MPListContainer
 		cntnrText.addComponent(BorderLayout.SOUTH, lblMsg);
 		//
 		c.addComponent(BorderLayout.CENTER, cntnrText);
+		//
+		final Container cntnrTimeAttach = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+		StyleHelpers.removeMargins(cntnrTimeAttach);
+		StyleHelpers.removePadding(cntnrTimeAttach);
+		//
+		final MPBorderlessLabel lblTime = new MPBorderlessLabel();
+		int tpbtm = lblTime.getStyle().getMargin(Component.TOP);
+		StyleHelpers.setMargin(lblTime, tpbtm, tpbtm, 0, 0);
+		tpbtm = lblTime.getStyle().getPadding(Component.TOP);
+		StyleHelpers.setPadding(lblTime, tpbtm, tpbtm, 0, 0);
+		StyleHelpers.setFgColor(lblTime, 0xB0B0B0);
+		StyleHelpers.setAlignment(lblTime, Component.RIGHT);
+		lblTime.setText("13:22");
+		cntnrTimeAttach.addComponent(lblTime);
+		//
+		final MPBorderlessLabel lblAttach = new MPBorderlessLabel();
+		tpbtm = lblAttach.getStyle().getMargin(Component.TOP);
+		StyleHelpers.setMargin(lblAttach, tpbtm, tpbtm, 0, 0);
+		tpbtm = lblAttach.getStyle().getPadding(Component.TOP);
+		StyleHelpers.setPadding(lblAttach, tpbtm, tpbtm, 0, 0);
+		StyleHelpers.setFgColor(lblAttach, 0xB0B0B0);
+		StyleHelpers.setAlignment(lblAttach, Component.CENTER);
+		lblAttach.setText("A");
+		cntnrTimeAttach.addComponent(lblAttach);
+		//
+		c.addComponent(BorderLayout.EAST, cntnrTimeAttach);
+		if (highlight)
+		{
+			StyleHelpers.setBorder(c, MPForm.yllwBorder);
+		}
+		else
+		{
+			StyleHelpers.setBorder(c, null);
+		}
+		//
 		return c;
 	}
 
@@ -183,30 +229,60 @@ public class ContConversations extends MPListContainer
 
 	public void focusGained(Component arg0)
 	{
-		super.focusGained();
-		System.out.println("Focus is on= " + arg0);
-		if (arg0 == cntrHello)
+		//super.focusGained();
+		System.out.println(">>>> " + arg0 + " ||| " + arg0.getName());
+		if (arg0 == cntrHello)// || (arg0 instanceof Button))
 		{
 			StyleHelpers.setBorder(cntrHello, MPForm.yllwBorder);
+			/*	parentForm.removeAllCommands();
+				parentForm.addCommand(cmdSelect);
+				parentForm.addCommand(cmdSearch);
+				parentForm.addCommand(cmdSettings);
+				parentForm.addCommand(cmdDelete);
+				parentForm.addCommand(cmdProfile);
+				parentForm.addCommand(cmdNewChat);
+				*/
+			//parentForm.revalidate();
+			//parentForm.repaint();
 		}
 	}
 
 	public void focusLost(Component arg0)
 	{
-		super.focusLost();
+		//super.focusLost();
 		System.out.println("Focus lost on= " + arg0);
-		if (arg0 == cntrHello)
+		if ((arg0 == cntrHello) || (arg0.getParent() == cntrHello))
 		{
 			StyleHelpers.setBorder(cntrHello, null);
-		}
+			/*	parentForm.removeCommand(cmdSelect);
+				parentForm.revalidate();
+				parentForm.repaint();
+			*/}
 	}
 
 	public void actionPerformed(ActionEvent arg0)
 	{
-		super.actionPerformed(arg0);
-		if (cmd != null)
+		final Component cmp = arg0.getComponent();
+		final Command cmd = arg0.getCommand();
+		System.out.println("cmd= " + cmd + "  cmp= " + cmp);
+		if (cmp != null)
 		{
+			if (arg0.getComponent().getParent() == cntrHello)
+			{
+				System.out.println("hello container selected");
+			}
+		}
+		else if (cmd != null)
+		{
+			if (cmd == cmdSelect)
+			{
+			}
 			System.out.println("CONVERSATIONS_ " + cmd.getCommandName());
 		}
+	}
+
+	public void initializeThis()
+	{
+		// TODO Auto-generated method stub
 	}
 }

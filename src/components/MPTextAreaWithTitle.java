@@ -1,6 +1,7 @@
 package components;
 
 import com.sun.lwuit.Container;
+import com.sun.lwuit.Display;
 import com.sun.lwuit.Label;
 import com.sun.lwuit.layouts.BoxLayout;
 
@@ -25,8 +26,10 @@ public class MPTextAreaWithTitle extends Container
 	{
 		setLayout(new BoxLayout(BoxLayout.Y_AXIS));
 		setFocusable(false);
+		lTextField.setUIID("TextArea");
 		lTextField.setPreferredH(40);
-		StyleHelpers.setBorder(lTextField, MPForm.blckBorder);
+		lTextField.setPreferredW(Display.getInstance().getDisplayWidth());
+		//StyleHelpers.setBorder(lTextField, MPForm.blckBorder);
 		layoutComponents();
 	}
 

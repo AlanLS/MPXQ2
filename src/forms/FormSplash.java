@@ -3,9 +3,12 @@ package forms;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
+import com.sun.lwuit.Display;
 import com.sun.lwuit.Form;
 import com.sun.lwuit.Image;
+import com.sun.lwuit.Label;
 import com.sun.lwuit.layouts.BorderLayout;
+import com.sun.lwuit.plaf.Style;
 
 public class FormSplash extends Form
 {
@@ -18,54 +21,47 @@ public class FormSplash extends Form
 		super();
 		try
 		{
-			image = Image.createImage("/logo.png");
+			image = Image.createImage("/logo.png").scaled(Display.getInstance().getDisplayWidth(), Display.getInstance().getDisplayHeight());
 		}
 		catch (final IOException e)
 		{
 			e.printStackTrace();
 		}
+		setLayout(new BorderLayout());
+		final Label l = new Label(image);
+		//l.getStyle().setAlignment(Component.CENTER);
+		addComponent(BorderLayout.CENTER, l);
 	}
 
 	public void show()
 	{
 		super.show();
-		setLayout(new BorderLayout());
-		// final Label l = new Label(image);
-		setBgImage(image);
-		// l.getStyle().setAlignment(Component.CENTER);
-		// addComponent(BorderLayout.CENTER, l);
 	}
 
 	protected void onShowCompleted()
 	{
 		super.onShowCompleted();
-		//
-		/*
-		 * FileConnection testDir = null; try { testDir = (FileConnection)
-		 * Connector.open(KeyStrings.memorycardPath, Connector.READ); } catch
-		 * (final IOException e) { } finally { if (testDir != null) { try {
-		 * testDir.close(); } catch (final IOException e) { } } } try { testDir
-		 * = (FileConnection)
-		 * Connector.open(System.getProperty("fileconn.dir.photos"),
-		 * Connector.READ); } catch (final IOException e) { } finally { if
-		 * (testDir != null) { try { testDir.close(); } catch (final IOException
-		 * e) { } } } if (ApplicationData.isAutosyncAllowed() == false) {
-		 * ApplicationData.setPhotoAndVideoSyncing(false); }
-		 */
 		timer = new Timer();
 		timerTask = new NextScreenTask();
+		((NextScreenTask) timerTask).f = this;
 		timer.schedule(timerTask, 3000);
 	}
 
 	public class NextScreenTask extends TimerTask
 	{
+		public Form	f	= null;
+
 		public void run()
 		{
 			timer.cancel();
 			timer = null;
 			cancel();
-			new mainTab().show();
-			// new FormPMD1().show();
+			//new mainTab().show();
+			final Style s = f.getStyle();
+			s.setBgImage(null);
+			f.repaint();
+			new FormPMD1().show();
+			//new mainTab().show();
 			/*
 			 * // if (ApplicationData.getCASSessionToken() != null) { // we have
 			 * a previous session ApplicationData.getAccessToken();

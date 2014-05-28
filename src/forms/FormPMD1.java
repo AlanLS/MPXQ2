@@ -10,15 +10,14 @@ import com.sun.lwuit.Container;
 import com.sun.lwuit.Display;
 import com.sun.lwuit.Label;
 import com.sun.lwuit.TextArea;
-import com.sun.lwuit.TextField;
 import com.sun.lwuit.events.ActionEvent;
+import com.sun.lwuit.layouts.BorderLayout;
 import com.sun.lwuit.layouts.BoxLayout;
 import components.MPBorderlessLabel;
 import components.MPForm;
 import components.MPGrowTextArea;
 import components.MPTextAreaWithTitle;
 import components.MPTextField;
-import components.MPTextFieldWithTitle;
 import components.StyleHelpers;
 
 /**
@@ -27,23 +26,21 @@ import components.StyleHelpers;
  */
 public class FormPMD1 extends MPForm
 {
-	protected final int				PMD1_UNINITTED	= -1;
-	protected final int				PMD1_ENTRY		= 0;
-	protected final int				PMD1_CORRECT	= 1;
-	protected final int				PMD1_COUNT		= 2;
-	protected int					PMD1_State		= PMD1_UNINITTED;
-	protected Container[]			containers		= new Container[PMD1_COUNT];
+	protected final int			PMD1_UNINITTED	= -1;
+	protected final int			PMD1_ENTRY		= 0;
+	protected final int			PMD1_CORRECT	= 1;
+	protected int				PMD1_State		= PMD1_UNINITTED;
 	//
-	private final Label				lCountryRegion	= null;
+	private final Label			lCountryRegion	= null;
 	// private MPTextFieldWithTitle tfPhoneNumber = null;
-	private MPTextAreaWithTitle		tfPhnNmbrVrfy	= null;
-	private MPTextFieldWithTitle	tfPhnNmbr		= null;
-	private Button					l				= null;
+	private MPTextAreaWithTitle	tfPhnNmbrVrfy	= null;
+	//private MPTextFieldWithTitle	tfPhnNmbr		= null;
+	private final Button		l				= null;
 	//
-	private final Command			okCommand		= new Command(rsrc.getString(L10nConstants.keys.COMMAND_OK));
-	private final Command			changeCommand	= new Command(rsrc.getString(L10nConstants.keys.COMMAND_CHANGE));
-	private final Command			exitCommand		= new Command(rsrc.getString(L10nConstants.keys.COMMAND_EXIT));
-	protected String				userPhoneNumber	= "";
+	private final Command		okCommand		= new Command(rsrc.getString(L10nConstants.keys.COMMAND_OK));
+	private final Command		changeCommand	= new Command(rsrc.getString(L10nConstants.keys.COMMAND_CHANGE));
+	private final Command		exitCommand		= new Command(rsrc.getString(L10nConstants.keys.COMMAND_EXIT));
+	protected String			userPhoneNumber	= "";
 
 	public FormPMD1()
 	{
@@ -52,16 +49,17 @@ public class FormPMD1 extends MPForm
 
 	public void show()
 	{
-		super.show();
-		if (PMD1_State == PMD1_UNINITTED)
-		{
-			showEntryScreen();
-		}
+		super.show();	
 	}
 
 	protected void onShowCompleted()
 	{
 		super.onShowCompleted();
+		
+		if (PMD1_State == PMD1_UNINITTED)
+		{
+			showEntryScreen();
+		}
 	}
 
 	private void showEntryScreen()
@@ -70,45 +68,63 @@ public class FormPMD1 extends MPForm
 		{
 			removeAllCommands();
 			PMD1_State = PMD1_ENTRY;
-			if (containers[PMD1_ENTRY] == null)
-			{
-				TextField.setUseNativeTextInput(false);
-				final Container cntnr = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-				//
-				final MPBorderlessLabel blEnterPhoneNumber = new MPBorderlessLabel(rsrc.getString(L10nConstants.keys.VYN_ENTERYOURNUMBER));
-				StyleHelpers.setMargin(blEnterPhoneNumber, 0, 0);
-				StyleHelpers.setPadding(blEnterPhoneNumber, 1, 1);
-				cntnr.addComponent(blEnterPhoneNumber);
-				//
-				final MPTextFieldWithTitle tfCntryRgn = new MPTextFieldWithTitle(rsrc.getString(L10nConstants.keys.VYN_COUNTRYREGION), "");
-				tfCntryRgn.getTfTextField().setHint(rsrc.getString(L10nConstants.keys.VYN_COUNTRYREGION));
-				tfCntryRgn.setFocusable(false);
-				cntnr.addComponent(tfCntryRgn);
-				//
-				tfPhnNmbr = new MPTextFieldWithTitle(rsrc.getString(L10nConstants.keys.VYN_PHONENUMBER), userPhoneNumber);
-				TextField.setUseNativeTextInput(false);
-				final MPTextField tf = tfPhnNmbr.getTfTextField();
-				tf.setHint(rsrc.getString(L10nConstants.keys.VYN_ENTERNUMBER));
-				tf.setInputMode("123");
-				tf.setConstraint(TextArea.PHONENUMBER);
-				tf.addActionListener(this);
-				tfPhnNmbr.setSelectCommandText(rsrc.getString(L10nConstants.keys.COMMAND_OK));
-				cntnr.addComponent(tfPhnNmbr);
-				//
-				final MPGrowTextArea gtaVerifyText = new MPGrowTextArea(rsrc.getString(L10nConstants.keys.VYN_TEXT));
-				gtaVerifyText.setFocusable(false);
-				StyleHelpers.setMargin(gtaVerifyText, 5, 0);
-				StyleHelpers.setPadding(gtaVerifyText, 0, 0);
-				cntnr.addComponent(gtaVerifyText);
-				//
-				containers[PMD1_ENTRY] = cntnr;
-			}
+			//if (containers[PMD1_ENTRY] == null)
+			final Container c = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 			//
-			replaceContent(getContentPane(), containers[PMD1_ENTRY], null);
-			setBackCommand(exitCommand);
-			setDefaultCommand(null);
-			tfPhnNmbr.getTfTextField().requestFocus();
-			getSelectCommand().setEnabled(false);
+			//final MPBorderlessLabel blEnterPhoneNumber = new MPBorderlessLabel(rsrc.getString(L10nConstants.keys.VYN_ENTERYOURNUMBER));
+			//StyleHelpers.setMargin(blEnterPhoneNumber, 0, 0);
+			//StyleHelpers.setPadding(blEnterPhoneNumber, 1, 1);
+			//c.addComponent(blEnterPhoneNumber);
+			//
+			final MPBorderlessLabel lblCode = new MPBorderlessLabel(rsrc.getString(L10nConstants.keys.VYN_COUNTRYREGION));
+			StyleHelpers.setMargin(lblCode, 5, 0);
+			StyleHelpers.setPadding(lblCode, 1, 1);
+			c.addComponent(lblCode);
+			//
+			final MPTextField tfCntryRgn = new MPTextField();
+			tfCntryRgn.setHint(rsrc.getString(L10nConstants.keys.VYN_COUNTRYREGION));
+			tfCntryRgn.setFocusable(false);
+			c.addComponent(tfCntryRgn);
+			//
+			//final MPTextFieldWithTitle tfCntryRgn = new MPTextFieldWithTitle(rsrc.getString(L10nConstants.keys.VYN_COUNTRYREGION), "");
+			//tfCntryRgn.getTfTextField().setHint(rsrc.getString(L10nConstants.keys.VYN_COUNTRYREGION));
+			//tfCntryRgn.setFocusable(false);
+			//c.addComponent(tfCntryRgn);
+			//
+			final MPBorderlessLabel lblNmbr = new MPBorderlessLabel(rsrc.getString(L10nConstants.keys.VYN_PHONENUMBER));
+			StyleHelpers.setMargin(lblNmbr, 5, 0);
+			StyleHelpers.setPadding(lblNmbr, 1, 1);
+			c.addComponent(lblNmbr);
+			//
+			final MPTextField tf = new MPTextField();//tfPhnNmbr.getTfTextField();
+			StyleHelpers.setMargin(tf, 0, 5);
+			StyleHelpers.setPadding(tf, 5, 5);
+			tf.setFocusable(true);
+			tf.setHint(rsrc.getString(L10nConstants.keys.VYN_ENTERNUMBER));
+			tf.setInputMode("123");
+			tf.setConstraint(TextArea.PHONENUMBER);
+			tf.setName("PHNNMBR");
+			tf.addActionListener(this);
+			//tfPhnNmbr.setSelectCommandText(rsrc.getString(L10nConstants.keys.COMMAND_OK));
+			c.addComponent(tf);
+			//
+			final MPGrowTextArea gtaVerifyText = new MPGrowTextArea(rsrc.getString(L10nConstants.keys.VYN_TEXT));
+			gtaVerifyText.setFocusable(true);
+			StyleHelpers.setMargin(gtaVerifyText, 5, 0);
+			StyleHelpers.setPadding(gtaVerifyText, 0, 0);
+			c.addComponent(gtaVerifyText);
+			//
+			Label ll =new Label();
+			ll.setPreferredH(Display.getInstance().getDisplayHeight() / 3);
+			ll.setPreferredW(Display.getInstance().getDisplayWidth());
+			ll.setFocusable(true);
+			c.addComponent(ll);
+			//containers[PMD1_ENTRY] = cntnr;
+			//
+			replaceContent(getContentPane(), c, null);
+			//setDefaultCommand(null);
+			addCommand(okCommand);
+			tf.requestFocus();
 			revalidate();
 			repaint();
 		}
@@ -120,25 +136,23 @@ public class FormPMD1 extends MPForm
 		{
 			removeAllCommands();
 			PMD1_State = PMD1_CORRECT;
-			if (containers[PMD1_CORRECT] == null)
-			{
-				final Container cntnr = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-				//
-				tfPhnNmbrVrfy = new MPTextAreaWithTitle(rsrc.getString(L10nConstants.keys.VYN_NUMBERCORRECT), userPhoneNumber);
-				tfPhnNmbrVrfy.setSelectCommandText(rsrc.getString(L10nConstants.keys.COMMAND_OK));
-				tfPhnNmbrVrfy.setTitleAtTop(false);
-				cntnr.addComponent(tfPhnNmbrVrfy);
-				l = new Button();
-				l.setUIID("Label");
-				l.setFocusable(true);
-				l.setSelectCommandText(rsrc.getString(L10nConstants.keys.COMMAND_OK));
-				l.addActionListener(this);
-				cntnr.addComponent(l);
-				containers[PMD1_CORRECT] = cntnr;
-			}
-			replaceContent(getContentPane(), containers[PMD1_CORRECT], null);
-			setBackCommand(changeCommand);
-			l.requestFocus();
+			//if (containers[PMD1_CORRECT] == null)
+			final Container c = new Container(new BorderLayout());
+			//
+			tfPhnNmbrVrfy = new MPTextAreaWithTitle(rsrc.getString(L10nConstants.keys.VYN_NUMBERCORRECT), userPhoneNumber);
+			tfPhnNmbrVrfy.setSelectCommandText(rsrc.getString(L10nConstants.keys.COMMAND_OK));
+			tfPhnNmbrVrfy.setTitleAtTop(false);
+			c.addComponent(BorderLayout.CENTER, tfPhnNmbrVrfy);
+			
+			Label ll = new Label();
+			ll.setPreferredH(Display.getInstance().getDisplayHeight());
+			ll.setPreferredW(Display.getInstance().getDisplayWidth());
+			ll.setFocusable(true);
+			
+			tfPhnNmbrVrfy.setFocusable(true);
+			replaceContent(getContentPane(), c, null);
+			addCommand(okCommand);
+			addCommand(changeCommand);
 			revalidate();
 			repaint();
 		}
@@ -162,7 +176,6 @@ public class FormPMD1 extends MPForm
 				{
 					if (isEntered())
 					{
-						tfPhnNmbr.setFocus(false);
 						showVerifyScreen();
 					}
 				}
@@ -185,19 +198,23 @@ public class FormPMD1 extends MPForm
 		}
 		else if (cmp != null)
 		{
-			if (cmp == tfPhnNmbr.getTfTextField())
+			final String cmpName = cmp.getName();
+			if (cmpName != null)
 			{
-				userPhoneNumber = tfPhnNmbr.getTfTextField().getText();
-				if (isEntered())
+				if (cmp.getName().equals("PHNNMBR"))
 				{
-					showVerifyScreen();
+					userPhoneNumber = ((MPTextField) cmp).getText();
+					//if (isEntered())
+					//{
+					//	showVerifyScreen();
+					//}
 				}
-			}
-			else if (cmp.getClass() == Button.class)
-			{
-				if (isEntered())
+				else if (cmp.getClass() == Button.class)
 				{
-					new FormPMD2().show();
+					if (isEntered())
+					{
+						new FormPMD2().show();
+					}
 				}
 			}
 		}
@@ -205,7 +222,7 @@ public class FormPMD1 extends MPForm
 
 	private boolean isEntered()
 	{
-		return ((tfPhnNmbr.getTfTextField().getText() != null) && (tfPhnNmbr.getTfTextField().getText().length() > 0));
+		return ((userPhoneNumber != null) && (userPhoneNumber.length() > 0));
 	}
 	/*
 	 * private void showHideOK() { final int cnt = getCommandCount(); for (int i

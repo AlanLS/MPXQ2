@@ -2,7 +2,6 @@ package forms;
 
 import lcl.L10nConstants;
 import com.sun.lwuit.Command;
-import com.sun.lwuit.Container;
 import com.sun.lwuit.events.ActionEvent;
 import com.sun.lwuit.layouts.BoxLayout;
 import components.MPForm;
@@ -31,17 +30,17 @@ public class FormTandC extends MPForm
 
 	private void showTandC()
 	{
-		final Container cntnr = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+		setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+		//final Container cntnr = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 		// cntnr.addComponent(BorderLayout.CENTER, innercntnr);
 		//
 		final MPGrowTextArea tandc = new MPGrowTextArea(rsrc.getString(L10nConstants.keys.TRM_TERMS, new String[] { "\r\n\r\n", "\r\n\r\n" }));
 		tandc.setScrollVisible(true);
-		cntnr.addComponent(tandc);
-		replaceContent(getContentPane(), cntnr, null);
+		addComponent(tandc);
+		//replaceContent(getContentPane(), cntnr, null);
 		setBackCommand(cancelCommand);
 		setDefaultCommand(iAgreeCommand);
-		revalidate();
-		repaint();
+		addCommand(iAgreeCommand);
 	}
 
 	public void actionPerformed(final ActionEvent arg0)

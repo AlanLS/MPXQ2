@@ -53,6 +53,19 @@ public class GlobalData
 		return isDebug;
 	}
 
+	// -------------------------------------------------------------------
+	private static String	userPhoneNumber	= "";
+
+	public static String getUserPhoneNumber()
+	{
+		return userPhoneNumber;
+	}
+
+	public static void setUserPhoneNumber(String userPhoneNumber)
+	{
+		GlobalData.userPhoneNumber = userPhoneNumber;
+	}
+
 	// ----------------------------------------------------------
 	protected GlobalData()
 	{

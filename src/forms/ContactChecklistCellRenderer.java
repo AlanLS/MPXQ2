@@ -651,7 +651,7 @@ public class ContactChecklistCellRenderer implements ListCellRenderer, CellRende
 						parentList.getComponentForm().dispatchCommand(cmd, new ActionEvent(parentList));
 						return;
 					}
-					for (int iter = 0; iter < selectedEntries.length; iter++)
+					/*for (int iter = 0; iter < selectedEntries.length; iter++)
 					{
 						if ((selectedEntries[iter] instanceof CheckBox) || (selectedEntries[iter] instanceof RadioButton))
 						{
@@ -684,7 +684,7 @@ public class ContactChecklistCellRenderer implements ListCellRenderer, CellRende
 							}
 							return;
 						}
-					}
+					}*/
 				}
 			}
 		}

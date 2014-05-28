@@ -8,6 +8,7 @@ import com.sun.lwuit.Component;
 import com.sun.lwuit.Container;
 import com.sun.lwuit.List;
 import com.sun.lwuit.events.ActionEvent;
+import com.sun.lwuit.events.SelectionListener;
 import com.sun.lwuit.layouts.BorderLayout;
 import com.sun.lwuit.list.ListModel;
 import components.Fonts;
@@ -16,11 +17,12 @@ import components.MPForm;
 import components.MPTextField;
 import components.StyleHelpers;
 
-public class FormContacts extends MPForm
+public class FormContacts extends MPForm implements SelectionListener
 {
-	private List				theList	= null;
-	private final MPTextField	txtArea	= new MPTextField();
-	private final Command		cmdDone	= new Command(rsrc.getString(L10nConstants.keys.COMMAND_DONE));
+	private List				theList		= null;
+	private final MPTextField	txtArea		= new MPTextField();
+	private final Command		cmdDone		= new Command(rsrc.getString(L10nConstants.keys.COMMAND_DONE));
+	private final Command		cmdSelect	= new Command("");
 
 	public FormContacts()
 	{
@@ -35,21 +37,22 @@ public class FormContacts extends MPForm
 		//
 		theList = new List(createModelData());
 		theList.addActionListener(this);
+		theList.addSelectionListener(this);
 		theList.setRenderer(new ContactChecklistCellRenderer(createRendererContainer(), createRendererContainer()));
 		theList.setPreferredH((getContentPane().getHeight() - (txtArea.getPreferredH() * 2)));
+		theList.setFocusable(true);
 		theList.addFocusListener(this);
 		c.addComponent(BorderLayout.CENTER, theList);
 		c.addComponent(BorderLayout.SOUTH, txtArea);
 		replaceContent(getContentPane(), c, null);
 		setTheTitleCount();
-		revalidate();
-		repaint();
 		//
 	}
 
 	protected void onShowCompleted()
 	{
 		super.onShowCompleted();
+		System.out.println("ShowCOmpl");
 		//
 	}
 
@@ -66,7 +69,7 @@ public class FormContacts extends MPForm
 				sz = lm.getSize();
 				for (int i = 0; i < sz; ++i)
 				{
-					System.out.println(">>" + lm.getItemAt(i) + "   " + lm.getItemAt(i).getClass());
+					//System.out.println(">>" + lm.getItemAt(i) + "   " + lm.getItemAt(i).getClass());
 					final Hashtable ht = (Hashtable) lm.getItemAt(i);
 					final Object b = ht.get("ChkBx");
 					if (b != null)
@@ -94,44 +97,6 @@ public class FormContacts extends MPForm
 		setTitle(rsrc.getString(L10nConstants.keys.GRP_SELECTCONTACTS, new String[] { str }));
 	}
 
-	/*
-	private Container createRendererContainer()
-	{
-	    Container c = new Container(new BorderLayout());
-	    c.setUIID("ListRenderer");
-	    MPBorderlessLabel name = new MPBorderlessLabel();
-	   // name.setFocusable(true);
-	    name.setName("Name");
-	    c.addComponent(BorderLayout.CENTER, name);
-	    CheckBox selected = new CheckBox();
-	    selected.setText(null);
-	    selected.setName("Selected");
-	   	// selected.setFocusable(true);
-	    c.addComponent(BorderLayout.WEST, selected);
-	    return c;
-	}
-
-	private Hashtable[] createModelData()
-	{
-	    Hashtable[] data = new Hashtable[5];
-	    data[0] = new Hashtable();
-	    data[0].put("Name", "Shai");
-	    data[0].put("Selected", Boolean.TRUE);
-	    data[1] = new Hashtable();
-	    data[1].put("Name", "Chen");
-	    data[1].put("Selected", Boolean.TRUE);
-	    data[2] = new Hashtable();
-	    data[2].put("Name", "Ofir");
-		data[2].put("Selected", Boolean.FALSE);
-	    data[3] = new Hashtable();
-	    data[3].put("Name", "Yaniv");
-	    data[3].put("Selected", Boolean.TRUE);
-	    data[4] = new Hashtable();
-	    data[4].put("Name", "Meirav");
-	    data[4].put("Selected", Boolean.TRUE);
-	    return data;
-	}
-	*/
 	private Container createRendererContainer()
 	{
 		final Container c = new Container(new BorderLayout());
@@ -206,6 +171,11 @@ public class FormContacts extends MPForm
 		data[11] = new Hashtable();
 		data[11].put("Name", "Alan Shapiro II");
 		data[11].put("ChkBx", Boolean.FALSE);
+		//for (int i=0; i< data.length; ++i)
+		//{
+		//	Hashtable ht = data[i];
+		//	ht.put("$navigation", cmdSelect);
+		//}
 		return data;
 	}
 
@@ -217,7 +187,43 @@ public class FormContacts extends MPForm
 	public void actionPerformed(final ActionEvent arg0)
 	{
 		super.actionPerformed(arg0);
-		setTheTitleCount();
+		if (cmd != null)
+		{
+			if (cmd == cmdDone)
+			{
+				new mainTab().show();
+			}
+		}
+		else if (cmp != null)
+		{
+			if (cmp == theList)
+			{
+				System.out.println("instanceof  " + theList.getSelectedItem().getClass());
+				if (theList.getSelectedItem() instanceof Hashtable)
+				{
+					final Hashtable ht = (Hashtable) theList.getSelectedItem();
+					Object bln = ht.get("ChkBx");
+					System.out.println("cb instanceof  " + (bln == null ? bln : bln.getClass()));
+					if ((bln != null) && (bln instanceof Boolean))
+					{
+						final boolean b = ((Boolean) bln).booleanValue();
+						bln = new Boolean(!b);
+						ht.remove("ChkBx");
+						ht.put("ChkBx", bln);
+						setTheTitleCount();
+					}
+				}
+				revalidate();
+				repaint();
+			}
+		}
+	}
+
+	public void focusLost(final Component arg0)
+	{
+		setDefaultCommand(null);
+		//setTheTitleCount();
+		//revalidate();
 	}
 
 	public void focusGained(final Component arg0)
@@ -227,9 +233,8 @@ public class FormContacts extends MPForm
 		if (arg0 == theList)
 		{
 			setDefaultCommand(null);
-			setTheTitleCount();
-			revalidate();
-			repaint();
+			//revalidate();
+			//setTheTitleCount();
 		}
 	}
 }

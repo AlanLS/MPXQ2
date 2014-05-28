@@ -5,13 +5,10 @@ package main;
 
 import java.io.IOException;
 import javax.microedition.midlet.MIDlet;
-import com.sun.lwuit.Dialog;
 import com.sun.lwuit.Display;
 import com.sun.lwuit.List;
 import com.sun.lwuit.TextField;
 import com.sun.lwuit.events.ActionEvent;
-import com.sun.lwuit.plaf.Border;
-import com.sun.lwuit.plaf.Style;
 import com.sun.lwuit.plaf.UIManager;
 import com.sun.lwuit.util.Resources;
 import forms.FormSplash;
@@ -26,11 +23,10 @@ public class MessagePlus extends MIDlet
 	{
 		// ApplicationData.setTheMidlet(this);
 		Display.init(this);
-		// TextField.setUseNativeTextInput(false);
-		// Display.getInstance().setTouchScreenDevice(false);
-		// Display.getInstance().setPureTouch(false);
-		// Display.getInstance().setThirdSoftButton(true);
+		//Display.getInstance().setTouchScreenDevice(false);
+		//Display.getInstance().setPureTouch(false);
 		//
+		Display.getInstance().setThirdSoftButton(true);
 		GlobalData.getInstance();
 		System.out.println("Start");
 		//
@@ -64,18 +60,11 @@ public class MessagePlus extends MIDlet
 		// ApplicationData.setExpiresIn(0);
 		//
 		Resources res = null;
+		//UIManager.getInstance().getLookAndFeel().setDefaultFormTintColor(0xffffffff);
 		try
 		{
-			res = com.sun.lwuit.util.Resources.open("/MsgPlusNoTouch.res");
+			res = com.sun.lwuit.util.Resources.open("/Blank.res");
 			UIManager.getInstance().setThemeProps(res.getTheme(res.getThemeResourceNames()[0]));
-			// Dialog Style -- rounded corners
-			final Style s = UIManager.getInstance().getComponentStyle("Dialog");
-			s.setBorder(Border.createRoundBorder(10, 10));
-			s.setBgTransparency(100);
-			s.setBgColor(0);
-			s.setFgColor(0x7f7f7f);
-			UIManager.getInstance().setComponentStyle("Dialog", s);
-			Dialog.setAutoAdjustDialogSize(true);
 		}
 		catch (final IOException e)
 		{
@@ -88,7 +77,7 @@ public class MessagePlus extends MIDlet
 		// KNetworkManager.getInstance().start();
 		// various Object static settings
 		//
-		// TextField.setReplaceMenuDefault(true);
+		TextField.setReplaceMenuDefault(true);
 		TextField.setUseNativeTextInput(true);
 		TextField.setQwertyAutoDetect(true);
 		//
@@ -96,6 +85,7 @@ public class MessagePlus extends MIDlet
 		//
 		// ApplicationData.setMidletversion(getAppProperty("MIDlet-Version"));
 		new FormSplash().show();
+		//new mainTab().show();
 	}
 
 	public void pauseApp()

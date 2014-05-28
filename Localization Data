@@ -26,6 +26,7 @@
       <entry key="Command_NewShout" value="New shout"/>
       <entry key="Command_Done" value="Done"/>
       <entry key="Command_NewGroup" value="New group"/>
+      <entry key="Command_Select" value="Select"/>
       <entry key="Command_SendMessage" value="Send message"/>
       <entry key="Command_AddToShout" value="Add to shout"/>
       <entry key="Command_Search" value="Search"/>
